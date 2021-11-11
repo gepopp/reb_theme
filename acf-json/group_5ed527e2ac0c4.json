@@ -1,0 +1,104 @@
+{
+    "key": "group_5ed527e2ac0c4",
+    "title": "Livestream",
+    "fields": [
+        {
+            "key": "field_5ed527e9c2279",
+            "label": "Termin",
+            "name": "termin",
+            "type": "date_time_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d.m.Y H:i:s",
+            "return_format": "d.m.Y H:i",
+            "first_day": 1
+        },
+        {
+            "key": "field_6143982f5f5f2",
+            "label": "ICS Datei",
+            "name": "ics_datei",
+            "type": "file",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_614ad5e239622",
+            "label": "Studiogäste",
+            "name": "studiogaste",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "zur_person"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "elements": [
+                "featured_image"
+            ],
+            "min": "",
+            "max": "",
+            "return_format": "id"
+        },
+        {
+            "key": "field_616199812fbf4",
+            "label": "Aktionen",
+            "name": "",
+            "type": "message",
+            "instructions": "\t\t<button id=\"vimeo_thumbnail\" data-post=\"7\" class=\"button-primary\">Bild von Vimeo aktualisieren<\/button>\r\n\t\t",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "livestream"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1636664697
+}

@@ -1,0 +1,13 @@
+{
+    "require": {
+        "a7/autoload": "^2.1",
+        "nesbot/carbon": "^2.41",
+        "google/apiclient": "^2.8",
+        "predis/predis": "^1.1",
+        "vimeo/vimeo-api": "2.0",
+        "phpoffice/phpspreadsheet": "^1.16",
+        "facebook/graph-sdk": "^5.7",
+        "php-http/curl-client": "^2.2",
+        "guzzlehttp/psr7": "^1.8"
+    }
+}

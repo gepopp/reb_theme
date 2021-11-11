@@ -1,0 +1,163 @@
+{
+    "key": "group_60126f0d56e57",
+    "title": "ZOOM Api",
+    "fields": [
+        {
+            "key": "field_60126f14b73d4",
+            "label": "Zoom Api Key",
+            "name": "zoom_api_key",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_60126f20b73d5",
+            "label": "Zoom Api Secret",
+            "name": "zoom_api_secret",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_6012782af436e",
+            "label": "Email des Zoom Nutzers",
+            "name": "email_des_zoom_nutzers",
+            "type": "email",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_60127cd33b046",
+            "label": "Default Vorschaubild",
+            "name": "default_vorschaubild",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_6013cf1ad4688",
+            "label": "Login Seite",
+            "name": "login_seite",
+            "type": "page_link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "allow_archives": 1,
+            "multiple": 0
+        },
+        {
+            "key": "field_6013cf36d4689",
+            "label": "Registrierungsseite",
+            "name": "registrierungsseite",
+            "type": "page_link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "allow_archives": 1,
+            "multiple": 0
+        },
+        {
+            "key": "field_601273dde8eb6",
+            "label": "Test",
+            "name": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "    <pre>\r\n        <code>\r\n            Array\n(\n    [page_size] => 30\n    [total_records] => 20\n    [next_page_token] => \n    [webinars] => Array\n        (\n            [0] => Array\n                (\n                    [uuid] => mCKHkoSoS8Gp6A9LeYuwRg==\n                    [id] => 85007818500\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => Executive Talk mit Daniel Jelitzka\n                    [type] => 5\n                    [start_time] => 2020-11-03T15:00:00Z\n                    [duration] => 90\n                    [timezone] => Europe\/Vienna\n                    [agenda] => Die JP Immobilien Gruppe ist im Wohnungs-, Hotel- und Büromarkt aktiv und hat seit 1996 mehr als 300 Immobilien vorwiegend in Wien entwickelt. Welche Pläne verfolgt Daniel Jelitzka in den kommenden Monaten? Welche Immobilienarten sind für Ihn derzeit\n                    [created_at] => 2020-10-20T17:48:50Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/85007818500?pwd=bFlTcGs4S3pTZkg0T1M2QUtXOWRDZz09\n                )\n\n            [1] => Array\n                (\n                    [uuid] => S3BA2HDjRgixZKNVD9WDHA==\n                    [id] => 85843944588\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => ImmoLive Generalprobe\n                    [type] => 5\n                    [start_time] => 2020-11-06T12:00:00Z\n                    [duration] => 60\n                    [timezone] => Europe\/Vienna\n                    [created_at] => 2020-11-05T11:46:06Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/85843944588?pwd=cE44S01sTWgwRVI3WlhVQ0tIMFo0dz09\n                )\n\n            [2] => Array\n                (\n                    [uuid] => 3s0zmJdwQIiTvhxix9bDTw==\n                    [id] => 86986389330\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => Gefahr für Immobilienbranche durch neue Gesetze\n                    [type] => 5\n                    [start_time] => 2020-11-10T15:00:00Z\n                    [duration] => 90\n                    [timezone] => Europe\/Vienna\n                    [agenda] => Raumordnung, Mietrecht, Bestellerprinzip. etc. – die Immobilienbranche muss sich mit zahlreichen rechtlichen Themen beschäftigen. Welche Veränderungen werden erwartet und vor allem: Welche sind sinnvoll? Welche Ideen in welchen Ländern kann man sich \n                    [created_at] => 2020-10-20T17:49:28Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/86986389330?pwd=OW5sWmZLMDhhOGVRTmc5TldKaEVNZz09\n                )\n\n            [3] => Array\n                (\n                    [uuid] => RFgUxpHJQ7C3fjjbqjLctw==\n                    [id] => 82817005083\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => Executive Talk Peter Ulm\n                    [type] => 5\n                    [start_time] => 2020-11-17T15:00:00Z\n                    [duration] => 60\n                    [timezone] => Europe\/Vienna\n                    [agenda] => Nach vielen Jahren bei großen Unternehmen hat sich Peter Ulm mit allora Immobilien selbständig gemacht. Welche Pläne hat er mit seinem Unternehmen? Wie sieht er die kommenden Monate? Welche Auswirkungen hat der derzeitige rasante Wandel auf die Immob\n                    [created_at] => 2020-11-11T07:39:56Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/82817005083?pwd=OTNZOEhubFhFaVU3cFl3RjRmSTQ4dz09\n                )\n\n            [4] => Array\n                (\n                    [uuid] => vfxCKXDuQhCfAKcpUO7dcQ==\n                    [id] => 84798281959\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => ImmoLive Testlauf\n                    [type] => 5\n                    [start_time] => 2020-11-20T10:00:00Z\n                    [duration] => 60\n                    [timezone] => Europe\/Vienna\n                    [created_at] => 2020-11-20T07:44:38Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/84798281959?pwd=dU82NmFJdW1ZSks1YmVNb0xXVU40dz09\n                )\n\n            [5] => Array\n                (\n                    [uuid] => opB9vNn8S0uS7xhF8Ojmgw==\n                    [id] => 82068572319\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => Geldanlage in Immobilien\n                    [type] => 5\n                    [start_time] => 2020-11-24T15:00:00Z\n                    [duration] => 90\n                    [timezone] => Europe\/Vienna\n                    [agenda] => Investment in Immobilien boomt! Und wie! Aber wie lange noch? Und gilt das für alle Arten von Immobilien? Diskutieren Sie mit 5 Top Experten über die aktuelle Situation und die Zukunft der Immobilieninvestments:\n                    [created_at] => 2020-10-20T17:49:39Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/82068572319?pwd=UHFMWllhd1I0K3BFb1VRSnZBWUc4QT09\n                )\n\n            [6] => Array\n                (\n                    [uuid] => u2RNNey6TB2507lcG0N6AA==\n                    [id] => 87421311226\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => ImmoLive Testlauf\n                    [type] => 5\n                    [start_time] => 2020-11-27T11:00:00Z\n                    [duration] => 60\n                    [timezone] => Europe\/Vienna\n                    [created_at] => 2020-11-26T15:27:29Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/87421311226?pwd=VnRjMXlEdGk3ajJ5RmVWdlI0RGIvUT09\n                )\n\n            [7] => Array\n                (\n                    [uuid] => UHE2Rx9oSHKji03t2C82Tw==\n                    [id] => 82844758048\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => Welche Lehren zieht die Immobranche aus dem Krisenjahr?\n                    [type] => 5\n                    [start_time] => 2020-12-01T15:00:00Z\n                    [duration] => 90\n                    [timezone] => Europe\/Vienna\n                    [agenda] => COVID-19 hat uns nach wie vor fest im Griff. Aber welche Lehren zieht die Immobilienwirtschaft aus der Krise? Gibt es eine neue Normalität? Oder ist alles beim Alten?  4 Spitzenvertreter der Immo-Branche diskutieren mit Ihnen und miteinander!\n                    [created_at] => 2020-10-20T17:49:49Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/82844758048?pwd=MCtHdmtOaWQyZGhBL0h5eFdwZys1Zz09\n                )\n\n            [8] => Array\n                (\n                    [uuid] => SEgkB9n7Qz21LWlwU0uRAQ==\n                    [id] => 86320674827\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => Executive Talk Sascha Haimovici (ivv)\n                    [type] => 5\n                    [start_time] => 2020-12-09T15:00:00Z\n                    [duration] => 90\n                    [timezone] => Europe\/Vienna\n                    [created_at] => 2020-10-20T17:50:00Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/86320674827?pwd=V2VtQm9sUjJBK3d0MTR0SkV5T1ZDUT09\n                )\n\n            [9] => Array\n                (\n                    [uuid] => cK1WkjJWTe+nDOvbdEPzTQ==\n                    [id] => 81640208723\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => ImmoLive Testlauf\n                    [type] => 5\n                    [start_time] => 2020-12-10T16:00:00Z\n                    [duration] => 60\n                    [timezone] => Europe\/Vienna\n                    [created_at] => 2020-12-09T12:19:41Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/81640208723?pwd=ZjA5WjdoQkh3ZnR0YTFHZ3k0TENyUT09\n                )\n\n            [10] => Array\n                (\n                    [uuid] => EOjKhAhyThmYDKN9Dz5JbA==\n                    [id] => 84553724424\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => ImmoLive Ausblick 2021\n                    [type] => 5\n                    [start_time] => 2020-12-15T15:00:00Z\n                    [duration] => 90\n                    [timezone] => Europe\/Vienna\n                    [created_at] => 2020-10-20T17:50:13Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/84553724424?pwd=c0NZZkRiY0lTTllYTkFiSlRKcUE5dz09\n                )\n\n            [11] => Array\n                (\n                    [uuid] => qTN6u5mkRlKIsVb9iOjQpw==\n                    [id] => 88626715222\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => Weihnachtsrunde\n                    [type] => 5\n                    [start_time] => 2020-12-22T15:00:00Z\n                    [duration] => 90\n                    [timezone] => Europe\/Vienna\n                    [created_at] => 2020-10-20T17:50:26Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/88626715222?pwd=eTdhVnFPcVJTSEtlYUR1eVgvS2lHQT09\n                )\n\n            [12] => Array\n                (\n                    [uuid] => AOdh23+\/QpqewX+LXOz+Lg==\n                    [id] => 87972191020\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => ImmoLive Testlauf\n                    [type] => 5\n                    [start_time] => 2021-01-18T16:00:00Z\n                    [duration] => 60\n                    [timezone] => Europe\/Vienna\n                    [created_at] => 2021-01-18T12:41:25Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/87972191020?pwd=NTFTajRIQU8ra211cHZibVVFNldEdz09\n                )\n\n            [13] => Array\n                (\n                    [uuid] => ndFJK+zXQJ+onhxGv4ukEQ==\n                    [id] => 86593779597\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => 2021 - Jahr des Neubeginns?\n                    [type] => 5\n                    [start_time] => 2021-01-19T15:00:00Z\n                    [duration] => 60\n                    [timezone] => Europe\/Vienna\n                    [agenda] => Das Jahr startet holprig. Wie sieht der Ausblick auf die Immobilienmärkte aus? Wie rüsten sich die Immo-Unternehmen für den Neustart? Welche Entwicklungen kommen auf uns zu?\n                    [created_at] => 2021-01-14T12:26:11Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/86593779597?pwd=d0lydUcxZUpReUlqOTQzVTJ4UGNXdz09\n                )\n\n            [14] => Array\n                (\n                    [uuid] => a0hZm24iTuSZ6NxLKoxkFA==\n                    [id] => 85706862629\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => ImmoLive Testlauf\n                    [type] => 5\n                    [start_time] => 2021-01-22T11:30:00Z\n                    [duration] => 60\n                    [timezone] => Europe\/Vienna\n                    [created_at] => 2021-01-21T11:13:00Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/85706862629?pwd=eHNzdmZKMDBGUUEydzhIVzNtRWpuUT09\n                )\n\n            [15] => Array\n                (\n                    [uuid] => jETNbyY8RV6ilVh2eWC+ZA==\n                    [id] => 89575376065\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => Die Zukunft der Hausverwaltungen\n                    [type] => 5\n                    [start_time] => 2021-01-26T15:00:00Z\n                    [duration] => 60\n                    [timezone] => Europe\/Vienna\n                    [agenda] => Welche rechtlichen Auswirkungen auf die Verwaltung von Häusern gibt es? Wie wirkt sich die Digitalisierung auf das Management von Immobilien aus? Wie geht man mit dem Home Office in Hausverwaltungen um?\n                    [created_at] => 2021-01-19T16:28:41Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/89575376065?pwd=N1RjK3B3YWNPOVQxaWhqbGpBV0QvQT09\n                )\n\n            [16] => Array\n                (\n                    [uuid] => S2hz896zSdmTON\/wRRfywg==\n                    [id] => 88494284219\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => Executive Talk\n                    [type] => 5\n                    [start_time] => 2021-02-02T15:00:00Z\n                    [duration] => 120\n                    [timezone] => Europe\/Vienna\n                    [agenda] => Was bringt das Jahr 2021 für das größte an der Börse notierte Immobilienunternehmen Österreichs? Wie geht es am Büro- und Retailmarkt weiter? Welche Herausforderungen erwarten Führungskräfte in den nächsten Monaten?\n                    [created_at] => 2021-01-23T12:05:47Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/88494284219?pwd=TGlZRzl6dllNSFBDalBFT1JLbTcyZz09\n                )\n\n            [17] => Array\n                (\n                    [uuid] => XO9bBW82SVqJqXQqdhk5Gw==\n                    [id] => 82588347464\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => Die Vorsorgewohnungsrunde\n                    [type] => 5\n                    [start_time] => 2021-02-09T15:00:00Z\n                    [duration] => 60\n                    [timezone] => Europe\/Vienna\n                    [agenda] => Welche Immo-Investments funktionieren? Wie entwickelt sich der Mietmarkt? Welche Grundrisse müssen Anlegerwohnungen in Zukunft haben? Mit welchen Renditen ist zu rechnen?\n                    [created_at] => 2021-01-23T12:07:55Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/82588347464?pwd=RWdUSWRHbEUraGpTdTZoc0lxSWNHQT09\n                )\n\n            [18] => Array\n                (\n                    [uuid] => WJ2kPhfHRBG1czQst\/q7gA==\n                    [id] => 84152307329\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => Die Zukunft des Einzelhandels\n                    [type] => 5\n                    [start_time] => 2021-02-23T15:00:00Z\n                    [duration] => 60\n                    [timezone] => Europe\/Vienna\n                    [agenda] => Einkaufszentren, Shops, Fachmarktzentren sind nach wie vor schwer unter Druck - wie geht es weiter? Und was passiert mit der Gastronomie?\n                    [created_at] => 2021-01-23T12:12:05Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/84152307329?pwd=dHYxenNVMmlEYnJORGlwdldxckcvUT09\n                )\n\n            [19] => Array\n                (\n                    [uuid] => FHzseWeiRDiXgN2QZl7OBQ==\n                    [id] => 87593702159\n                    [host_id] => Rg5d4EX0RMGR-4JQUAyRhw\n                    [topic] => Mediation - Lösen statt streiten\n                    [type] => 5\n                    [start_time] => 2021-03-02T15:00:00Z\n                    [duration] => 120\n                    [timezone] => Europe\/Vienna\n                    [agenda] => Corona bringt unzählige Streitfälle - wann ist es besser, mittels Mediation zu lösen - wann muss der Klagsweg beschritten werden? Welche Formen der Mediation sind möglich?\n                    [created_at] => 2021-01-23T12:14:28Z\n                    [join_url] => https:\/\/us02web.zoom.us\/j\/87593702159?pwd=cmJzcW0vZTRoSkt2aVRFL2czWldyUT09\n                )\n\n        )\n\n)\n1        <\/code>\r\n    <\/pre>\r\n    ",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-zoom"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1611910998
+}

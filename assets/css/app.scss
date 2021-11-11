@@ -1,0 +1,211 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+body {
+  @apply min-h-screen flex flex-col justify-between;
+}
+
+input:focus {
+  outline: none !important;
+}
+
+
+iframe {
+  max-width: 100% !important;
+}
+
+.image-holder {
+  background-image: url("../../assets/images/icon.svg");
+  background-position: center;
+  background-size: 25%;
+  background-repeat: no-repeat;
+  background-color: #1a202c;
+  padding-top: 75%;
+}
+
+.image-holder img {
+  margin-top: -75%;
+}
+
+.animate-ping {
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(25%);
+    animationTimingFunction: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animationTimingFunction: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+@keyframes ping {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  75%, 100% {
+    transform: scale(2);
+    opacity: 1;
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+.content {
+
+  h2 {
+    @apply font-semibold text-2xl my-5;
+  }
+
+  ul {
+    @apply list-disc ml-10 py-5;
+  }
+
+  a {
+    @apply text-primary-100 underline;
+  }
+
+  table {
+    @apply table-auto;
+  }
+
+  .wp-post-image {
+    @apply w-full h-auto;
+  }
+
+}
+
+.wp-block-button {
+
+  @apply py-10;
+
+  .wp-block-button__link {
+    @apply bg-primary-100 text-white;
+  }
+
+}
+
+[x-cloak] {
+  display: none;
+}
+
+.snap {
+  -ms-scroll-snap-type: x mandatory;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth
+}
+
+.snap::-webkit-scrollbar {
+  display: none;
+}
+
+.snap > div {
+  scroll-snap-align: center;
+}
+
+figure.size-large {
+  @apply m-0;
+}
+
+figcaption {
+  @apply text-center text-gray-600 pb-5;
+}
+
+.wp-block-button {
+  @apply flex justify-center;
+}
+
+.wp-block-button__link {
+  @apply p-3 text-center text-white bg-primary-100 font-semibold shadow-xl;
+}
+
+figure.wp-block-embed-youtube {
+  @apply my-10;
+}
+
+figure iframe {
+  width: 100%;
+  height: auto;
+  min-height: 480px;
+}
+
+ol {
+  @apply list-decimal pl-5;
+}
+
+.mobile-menu {
+  li {
+    @apply py-2;
+  }
+}
+
+.content p {
+  @apply mb-2;
+}
+
+.content .comments-area p {
+  @apply mb-0;
+}
+
+.content .comments-area .comment p {
+  @apply leading-none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.comment p {
+  @apply leading-none font-medium text-sm;
+}
+
+.vp-live-viewer-count {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.three-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.button-primary{
+  @apply inline-block py-3 px-5 bg-primary-100 text-center text-white font-semibold;
+}
