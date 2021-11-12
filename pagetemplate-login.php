@@ -15,16 +15,22 @@ global $FormSession;
 <script>
     var login_data = <?php echo json_encode($FormSession->getFormData()) ?>;
 </script>
-    <div class="container mx-auto relative px-5 md:px-0 flex justify-center pt-32">
+    <div class="container mx-auto relative px-5 md:px-0 flex justify-center">
         <div class="h-auto" x-data="loginForm(login_data)">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <div class="bg-white p-5 shadow-xl lg:w-96">
-                    <h3 class="text-xl font-medium text-gray-700 mb-4"><?php _e('Login', 'ir21') ?></h3>
+                <div class="bg-black text-white p-5 shadow-xl lg:w-96">
+                    <h3 class="text-2xl font-medium mb-4 uppercase font-bold">
+                        <?php _e('login', 'reb_domain') ?>
+                    </h3>
                     <?php get_template_part('login', 'form') ?>
                 </div>
                 <div>
-                    <h1 class="text-2xl font-serif mb-5"><?php the_title() ?></h1>
-                    <p class="px-5 mb-10"><?php the_content(); ?></p>
+                    <h1 class="text-3xl font-normal	mb-5">
+                        <?php the_title() ?>
+                    </h1>
+                    <div>
+                        <?php the_content(); ?>
+                    </div>
                 </div>
             </div>
         </div>

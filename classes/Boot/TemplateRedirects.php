@@ -28,15 +28,11 @@ class TemplateRedirects {
 
 	public function redirect(){
 
-		if(is_tag('immolive')){
-			wp_safe_redirect(home_url('diskutieren'));
-		}
-
-
 		if( (   is_page_template('pagetemplate-login.php') ||
 			    is_page_template('pagetemplate-resend-activation.php') ||
 			    is_page_template('pagetemplate-register.php') )
 		    && is_user_logged_in()){
+
 			wp_safe_redirect(get_field('field_601bc4580a4fc', 'option'));
 		}
 

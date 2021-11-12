@@ -209,3 +209,10 @@ html {
 .button-primary{
   @apply inline-block py-3 px-5 text-center text-white font-semibold;
 }
+
+.reb-input{
+  @apply relative mb-10;
+  input{
+    @apply border-b border-white text-white bg-logo block p-2 w-full font-bold;
+  }
+}

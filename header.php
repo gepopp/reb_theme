@@ -106,7 +106,7 @@ language_attributes(); ?>>
                         </svg>
                     </div>
                 </div>
-                <div class="absolute top-0 right-0 h-screen border-l-2 border-logo bg-white z-50 p-8 shadow-2xl animate__animated animate__slideInRight" x-show="show">
+                <div class="absolute top-0 right-0 h-screen border-l-2 border-logo bg-white z-50 p-8 shadow-2xl animate__animated animate__slideInRight md:hidden" x-show="show">
                     <ul class="flex flex-col h-full">
                         <li @click="show = !show" class="w-full flex justify-end">
                             <svg class="w-12 h-12 text-logo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

@@ -908,8 +908,8 @@ video {
   margin-left: 1rem;
 }
 
-.mb-6 {
-  margin-bottom: 1.5rem;
+.-mt-4 {
+  margin-top: -1rem;
 }
 
 .-mt-10 {
@@ -1790,10 +1790,6 @@ video {
   padding-right: 0.75rem;
 }
 
-.pt-32 {
-  padding-top: 8rem;
-}
-
 .pt-6 {
   padding-top: 1.5rem;
 }
@@ -2063,11 +2059,6 @@ video {
 .text-green-500 {
   --tw-text-opacity: 1;
   color: rgba(16, 185, 129, var(--tw-text-opacity));
-}
-
-.text-blue-500 {
-  --tw-text-opacity: 1;
-  color: rgba(59, 130, 246, var(--tw-text-opacity));
 }
 
 .text-red-700 {
@@ -2600,6 +2591,46 @@ html {
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
+.reb-input {
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+
+.reb-input input {
+  display: block;
+}
+
+.reb-input input {
+  width: 100%;
+}
+
+.reb-input input {
+  border-bottom-width: 1px;
+}
+
+.reb-input input {
+  --tw-border-opacity: 1;
+  border-color: rgba(255, 255, 255, var(--tw-border-opacity));
+}
+
+.reb-input input {
+  --tw-bg-opacity: 1;
+  background-color: rgba(26, 26, 24, var(--tw-bg-opacity));
+}
+
+.reb-input input {
+  padding: 0.5rem;
+}
+
+.reb-input input {
+  font-weight: 700;
+}
+
+.reb-input input {
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
 .last\:mb-0:last-child {
   margin-bottom: 0px;
 }
@@ -2612,11 +2643,6 @@ html {
 .hover\:bg-gray-50:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(249, 250, 251, var(--tw-bg-opacity));
-}
-
-.hover\:text-blue-800:hover {
-  --tw-text-opacity: 1;
-  color: rgba(30, 64, 175, var(--tw-text-opacity));
 }
 
 .hover\:text-opacity-100:hover {
