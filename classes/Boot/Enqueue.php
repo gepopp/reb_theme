@@ -29,6 +29,16 @@ class Enqueue {
 
 		// CSS
 		wp_enqueue_style(
+			'reb_livestream_theme_font',
+			reb_livestream_theme_URL . "/assets/fonts/helvetica-neue-lt-pro/style.css",
+			[],
+			reb_livestream_theme_VERSION,
+			''
+		);
+
+
+		// CSS
+		wp_enqueue_style(
 			'reb_livestream_theme_css',
 			reb_livestream_theme_URL . "/dist/main.css",
 			[],
@@ -53,7 +63,7 @@ class Enqueue {
 			'email_exists'         => __( "Please enter a email address that is not registered.", 'reb_domain' ),
 			'email_invalid'        => __( "Please enter a valid email address.", 'reb_domain' ),
 			'email_not_registered' => __( 'This address is not regstered.', 'reb_domain' ),
-			'email_sent'           => __('We sent you an email, please check your inbox.', 'reb_domain'),
+			'email_sent'           => __( 'We sent you an email, please check your inbox.', 'reb_domain' ),
 			'rootapiurl'           => esc_url_raw( rest_url() ),
 			'nonce'                => wp_create_nonce( 'wp_rest' ),
 		] );

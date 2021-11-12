@@ -25,7 +25,7 @@ global $FormSession;
                     <?php get_template_part('login', 'form') ?>
                 </div>
                 <div>
-                    <h1 class="text-3xl font-normal	mb-5">
+                    <h1 class="text-3xl font-bold mb-5">
                         <?php the_title() ?>
                     </h1>
                     <div>

@@ -49,7 +49,7 @@ module.exports = {
 			},
 			fontFamily: {
 				sans: [
-					'"Helvetica Neue"',
+					'"Helvetica Neue LT Pro 65 Medium"',
 					'sans-serif'
 				],
 				serif: [
