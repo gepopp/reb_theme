@@ -36,7 +36,6 @@ class Enqueue {
 			''
 		);
 
-
 		// CSS
 		wp_enqueue_style(
 			'reb_livestream_theme_css',
