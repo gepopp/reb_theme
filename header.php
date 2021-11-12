@@ -60,7 +60,9 @@ language_attributes(); ?>>
 <header class="header w-full">
     <div class="flex justify-between w-full">
         <div class="logo-holder p-8">
-            <img src="<?php echo get_stylesheet_directory_uri() ?>/assets/images/real-estate-brand-institute_logo.svg" class="w-36 md:w-48 lg:w-64"/>
+            <a href="<?php echo home_url() ?>">
+                <img src="<?php echo get_stylesheet_directory_uri() ?>/assets/images/real-estate-brand-institute_logo_talks.svg" class="w-36 md:w-48 lg:w-64"/>
+            </a>
         </div>
         <div class="p-8 text-logo">
             <ul class="space-x-5 hidden md:flex">
