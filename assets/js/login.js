@@ -9,6 +9,7 @@ window.loginForm = function (formdata) {
             password: false,
         },
         ValidateEmail() {
+
             if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.email)) {
                 var params = new URLSearchParams();
                 params.append('action', 'user_exists');
@@ -20,11 +21,11 @@ window.loginForm = function (formdata) {
                         this.checkCompleted();
                     })
                     .catch((err) => {
-                        this.error.email = "Diese E-Mail Adresse ist nicht registriert.";
+                        this.error.email = window.messages.email_not_registered;
                         this.checkCompleted();
                     });
             } else {
-                this.error.email = "Bitte eine gültige E-Mail Adresse eingeben.";
+                this.error.email = window.messages.email_invalid;
                 this.checkCompleted();
             }
         },
@@ -48,7 +49,7 @@ window.loginForm = function (formdata) {
                 axios.post(window.ajaxurl, params)
                     .then((rsp) => {
                         this.error.global = false;
-                        this.successMessage = "Wir haben Ihnen ein E-Mail gesendet, bitte überprüfen Sie Ihren Posteingang.";
+                        this.successMessage = window.messages.email_sent;
                     })
                     .catch((err) => {
                         this.error.global = err.data;

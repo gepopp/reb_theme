@@ -101,9 +101,9 @@ class FormSession {
 
 		if ( ! empty( $this->content['errorBag'][ $index ] ) ):
 			?>
-            <div class="text-warning p-5 text-white flex space-x-3 items-center">
+            <div class="text-warning py-5 text-white flex space-x-3 items-center">
                 <div>
-                    <div class="rounded-full bg-warning bg-opacity-25 w-10 h-10 flex items-center justify-center">
+                    <div class="rounded-full bg-warning w-10 h-10 flex items-center justify-center">
                         <svg class="h-4 w-4 text-white animate-ping" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                         </svg>
@@ -173,28 +173,27 @@ class FormSession {
 
 	protected function setupMessages() {
 		$this->messages = [
-			'nonce'                 => __( "Wir konnten nicht verifizieren dass, das Formular von einem Menschen geschickt wurde. Bitte laden Sie die Seite neu und versuchen Sie es noch einmal.", 'ir21' ),
-			'agb'                   => __( "Bitte akzeptieren Sie die AGB.", 'ir21' ),
-			'register_error'        => __( "Wir konnten Ihre Daten nicht speichern, bitte versuchen Sie es später noch einmal.", 'ir21' ),
-			'register_sent_success' => sprintf( __( 'Wir haben Ihnen ein E-Mail mit einem Link zum bestätigen Ihrer E-Mail Adresse, bitte überprüfen Sie Ihre Posteingang. <a href="%s" class="font-medium underline">Link nocheinmal senden</a>', 'ir21' ), get_field( 'field_601ed5b0226a0', 'option' ) ),
-			'not_sent'              => sprintf( __( '<p>Wir konnten Ihnen kein E-Mail senden, bitte versuchen Sie es später erneut oder wenden Sie sich an den <a href="%s" class="underline">Administrator</a>.</p><p>Bitte beachten Sie, dass dieses E-Mail nur alle 5 Minuten versendet werden können.</p>', 'if21' ), get_option( 'admin_email' ) ),
-			'not_activated'         => sprintf( __( 'Sie haben Ihre E-Mail Adresse noch nicht bestätigt, bitte überprüfen Sie Ihr E-Mail Postfach. Sollten Sie kein E-Mail erhalten haben können Sie <a href="%s" class="font-medium underline">hier ein neues anfordern.</a>', 'ir21' ), get_field( 'field_601ed5b0226a0', 'option' ) ),
-			'login_credentials'     => __( 'Wir konnten Sie mit dieser Kombination aus E-Mail und Passwort nicht einloggen. Bitte versuchen Sie es erneut.', 'ir21' ),
-			'user_exists'           => __( 'Diese E-Mail-Adresse ist bereits registriert.', 'ir21' ),
-			'password_length'       => __( 'Ihr Passwort muss mindestens 8 Zeichen lang sein.', 'ir21' ),
-			'profile_updated'       => __( 'Ihre Profildaten wurden erfolgreich aktualisiert.', 'ir21' ),
-			'token_expired'         => sprintf( __( 'Dieser Link ist nicht mehr gültig, Sie können über die <a href="%s" class="font-semibold underline ">Passwort vergessen</a> funktion ein neues E-Mail anfordern', 'ir21' ), get_field( 'field_601e59c9336d7', 'option' ) ),
-			'account_acitvated'     => __( 'Ihr Account ist nun aktiviert, Sie können sich jetzt einloggen!', 'ir21' ),
-			'email_not_valid'       => __( 'Bitte geben Sie eine Valide Email Adresse ein.', 'ir21' ),
-			'email_not_found'       => __( 'Wir konnten zu dieser Adresse keinen Eintrag finden, bitte versuchen Sie es noch einmal.', 'ir21' ),
-			'reset_success'         => __( 'Wir haben Ihnen ein E-Mail mit einem Link zum zurücksetzen Ihres Passwortes gesendet, bitte überprüfen Sie Ihre Posteingang', 'ir21' ),
-			'password_changed'      => __( 'Ihr neues Passwort wurde gespeichert, Sie können sich jetzt einloggen.', 'ir21' ),
-			'profile_image_saved'   => __( 'Ihr neues Profilbild wurde gespeichert' ),
-			'profile_image_size'    => __( 'Hier sind maximal 2 MB erlaubt.' ),
-			'profile_image_mime'    => __( 'Hier sind nur jpg und png Dateien erlaubt.' ),
-            'default'               => __('Ein Fehler trat auf, bitte versuchen Sie es später erneut.'),
-            'zur_person_update'     => __('Vielen Dank, Ihr Vorschlag wurde erfolgreich eingereicht und wird nach Prüfung veröffentlicht.'),
-            'uploaderror'           => _('Uploadfehler! Bitte laden Sie die Seite neu und versuchen Sie es noch einmal.'),
+			'nonce'                 => __( "We could not verify that the data was sent by a human. Please reload this page and retry.", 'reb_domain' ),
+			'agb'                   => __( "Please accept our terms.", 'reb_domain' ),
+			'register_error'        => __( "We could not save your data, please retry.", 'reb_domain' ),
+			'register_sent_success' => sprintf( __( 'We have sent you an email with an link to confirm your email address, please check your inbox. <a href="%s" class="font-medium underline">resend link</a>', 'reb_domain' ), get_field( 'field_601ed5b0226a0', 'option' ) ),
+			'not_sent'              => sprintf( __( '<p>Sending you an email failed, please retry or contact our <a href="%s" class="underline">admin</a>.</p><p>Emails can only be send every five minutes.</p>', 'reb_domain' ), get_option( 'admin_email' ) ),
+			'not_activated'         => sprintf( __( 'You did not confirm your email address yet, please check your inbox. If you havent received an email you can <a href="%s" class="font-medium underline">request an new one here.</a>', 'reb_domain' ), get_field( 'field_601ed5b0226a0', 'option' ) ),
+			'login_credentials'     => __( 'This combination of email and password doesnt match any of our records.', 'reb_domain' ),
+			'user_exists'           => __( 'Diese E-Mail-Adresse ist bereits registriert.', 'reb_domain' ),
+			'password_length'       => __( 'Password must be at least 8 characters.', 'reb_domain' ),
+			'profile_updated'       => __( 'Your profile was updated.', 'reb_domain' ),
+			'token_expired'         => sprintf( __( 'This link is not valid anymore, You can request a new one via our <a href="%s" class="font-semibold underline ">password lost</a> function.', 'reb_domain' ), get_field( 'field_601e59c9336d7', 'option' ) ),
+			'account_acitvated'     => __( 'Your account has been activated. You can login now.', 'reb_domain' ),
+			'email_not_valid'       => __( 'Please enter a valid email address', 'reb_domain' ),
+			'email_not_found'       => __( 'We where not able to find a record to the email you entered.', 'reb_domain' ),
+			'reset_success'         => __( 'We sent you a link to reset your password, please check your inbox', 'reb_domain' ),
+			'password_changed'      => __( 'Your new password is set, you can login now.', 'reb_domain' ),
+			'profile_image_saved'   => __( 'Your profileimage was saved' ),
+			'profile_image_size'    => __( 'Max 2 MB alowed.' ),
+			'profile_image_mime'    => __( 'Only jpg or png files allowed.' ),
+            'default'               => __('There was an error, please try again.'),
+            'uploaderror'           => __('Uploaderror! Please refresh the page and try again.'),
 
 		];
 

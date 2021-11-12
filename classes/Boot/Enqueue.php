@@ -15,7 +15,7 @@ class Enqueue {
 	}
 
 
-	public function ir_admin_script(  ) {
+	public function ir_admin_script() {
 
 		wp_enqueue_script( 'ir_admin_script', reb_livestream_theme_URL . "/dist/admin.js", [], '1.0' );
 	}
@@ -46,14 +46,16 @@ class Enqueue {
 		);
 
 		wp_localize_script( 'reb_livestream_theme_js', 'messages', [
-			'select'          => __( 'Bitte wählen', 'ir21' ),
-			'enter_last_name' => __( 'Bitte geben Sie Ihren Nachnamen ein.', 'ir21' ),
-			'password_min'    => __( "Bitte geben Sie mindestens 8 Zeichen ein.", 'ir21' ),
-			'email_proofing'  => __( "E-Mail wird geprüft...", 'ir21' ),
-			'email_exists'    => __( "Bitte geben Sie eine E-Mail Adresse ein die noch nicht registriert ist.", 'ir21' ),
-			'email_invalid'   => __( "Bitte eine gültige E-Mail Adresse eingeben.", 'ir21' ),
-			'rootapiurl'      => esc_url_raw( rest_url() ),
-			'nonce'           => wp_create_nonce( 'wp_rest' ),
+			'select'               => __( 'Please select', 'reb_domain' ),
+			'enter_last_name'      => __( 'Please enter your name.', 'reb_domain' ),
+			'password_min'         => __( "Please enter at least 8 characters.", 'reb_domain' ),
+			'email_proofing'       => __( "Email is checked...", 'reb_domain' ),
+			'email_exists'         => __( "Please enter a email address that is not registered.", 'reb_domain' ),
+			'email_invalid'        => __( "Please enter a valid email address.", 'reb_domain' ),
+			'email_not_registered' => __( 'This address is not regstered.', 'reb_domain' ),
+			'email_sent'           => __('We sent you an email, please check your inbox.', 'reb_domain'),
+			'rootapiurl'           => esc_url_raw( rest_url() ),
+			'nonce'                => wp_create_nonce( 'wp_rest' ),
 		] );
 
 
