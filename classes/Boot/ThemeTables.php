@@ -27,12 +27,13 @@ class ThemeTables {
 
 
 		$tablename = $wpdb->prefix . self::ACTIVATION_TOKEN_TABLE;
-		$sql       = "CREATE TABLE IF NOT EXISTS $tablename
+		$sql       = "CREATE TABLE $tablename
     (
         id INT UNSIGNED NOT NULL AUTO_INCREMENT,
         user_id INT NOT NULL,
         email VARCHAR(255) NOT NULL,
         token VARCHAR(255) NOT NULL,
+    	redirect VARCHAR(255) NULL,
         created_at TIMESTAMP NOT NULL,
         PRIMARY KEY  (id)
     );";

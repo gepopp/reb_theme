@@ -70,10 +70,10 @@ language_attributes(); ?>>
 				if ( ! is_user_logged_in() ):
 					?>
                     <li class="text-lg font-semibold">
-                        <a href="<?php the_field( 'field_601bbffe28967', 'option' ); ?>"><?php _e( 'signin', 'reb_domain' ) ?></a>
+                        <a href="<?php the_field( 'field_601bc00528968', 'option' ) ?>" class="bg-logo text-white px-5 py-3 tex-center"><?php _e( 'signup', 'reb_domain' ) ?></a>
                     </li>
                     <li class="text-lg font-semibold">
-                        <a href="<?php the_field( 'field_601bc00528968', 'option' ) ?>" class="bg-logo text-white px-5 py-3 tex-center"><?php _e( 'signup', 'reb_domain' ) ?></a>
+                        <a href="<?php the_field( 'field_601bbffe28967', 'option' ); ?>"><?php _e( 'signin', 'reb_domain' ) ?></a>
                     </li>
 				<?php else: ?>
                     <li class="text-lg font-semibold">
@@ -119,10 +119,10 @@ language_attributes(); ?>>
 						if ( ! is_user_logged_in() ):
 							?>
                             <li class="text-lg font-semibold w-full mb-8">
-                                <a href="<?php the_field( 'field_601bbffe28967', 'option' ); ?>"><?php _e( 'signin', 'reb_domain' ) ?></a>
+                                <a href="<?php the_field( 'field_601bc00528968', 'option' ) ?>" class="bg-logo text-white px-5 py-3 tex-center"><?php _e( 'signup', 'reb_domain' ) ?></a>
                             </li>
                             <li class="text-lg font-semibold w-full mb-8">
-                                <a href="<?php the_field( 'field_601bc00528968', 'option' ) ?>" class="bg-logo text-white px-5 py-3 tex-center"><?php _e( 'signup', 'reb_domain' ) ?></a>
+                                <a href="<?php the_field( 'field_601bbffe28967', 'option' ); ?>"><?php _e( 'signin', 'reb_domain' ) ?></a>
                             </li>
 						<?php else: ?>
                             <li class="text-lg font-semibold w-full mb-8">

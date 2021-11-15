@@ -58,7 +58,7 @@ window.loginForm = function (formdata) {
         }
     }
 }
-window.registerForm = (formdata) => {
+window.registerForm = (formdata, captchaKey) => {
     return {
         data: {
             gender: formdata.register_gender !== undefined ? formdata.register_gender : '',
@@ -67,6 +67,7 @@ window.registerForm = (formdata) => {
             email: formdata.register_email !== undefined ? formdata.register_email : '',
             password: '',
             token: false,
+            agb : false
         },
         regsiter_errors: {
             gender: false,
@@ -75,7 +76,11 @@ window.registerForm = (formdata) => {
             email: false,
             password: false
         },
+        is_loading: false,
         validate(e) {
+
+            this.is_loading = true;
+
 
             e.preventDefault();
 
@@ -99,11 +104,14 @@ window.registerForm = (formdata) => {
         },
         valid() {
             for (var o in this.regsiter_errors)
-                if ( this.regsiter_errors[o] !== false ) return false;
+                if ( this.regsiter_errors[o] !== false ){
+                    this.is_loading = false;
+                    return false;
+                }
             var self = this;
 
             grecaptcha.ready(function() {
-                grecaptcha.execute('6Ldhsu4aAAAAAGj0UZRfizcHjtqKqPrPrxF_hsE0', {action: 'submit'}).then(function(token) {
+                grecaptcha.execute(captchaKey, {action: 'submit'}).then(function(token) {
                     self.data.token = token;
 
                     window.setTimeout(()=>{
@@ -123,7 +131,6 @@ window.registerForm = (formdata) => {
             }
         },
         ValidateEmail() {
-            this.regsiter_errors.email = messages.email_proofing;
             if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.data.email)) {
                 var params = new URLSearchParams();
                 params.append('action', 'user_exists');
@@ -131,14 +138,15 @@ window.registerForm = (formdata) => {
 
                 axios.post(window.ajaxurl, params)
                     .then((rsp) => {
+                        this.is_loading = false;
                         this.regsiter_errors.email = messages.email_exists;
                     })
                     .catch((err) => {
-                        this.regsiter_errors.email = false;
                         this.valid();
                     });
             } else {
                 this.regsiter_errors.email = messages.email_invalid;
+                this.is_loading = false;
             }
         },
     }

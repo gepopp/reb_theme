@@ -70,7 +70,7 @@ class User {
 		$password  = sanitize_text_field( $_POST['password'] );
 
 		$response = wp_remote_post( sprintf( 'https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s',
-			'6Ldhsu4aAAAAAEJUCrECbziRYSf_iw_XkuSpWPma',
+			get_field('field_6192780b4967b', 'option'),
 			sanitize_text_field( $_POST['grecaptcha'] )
 		) );
 
@@ -88,7 +88,6 @@ class User {
 			exit;
 		}
 
-		$captcha_key = '6Ldhsu4aAAAAAEJUCrECbziRYSf_iw_XkuSpWPma';
 
 		if ( sanitize_email( $email ) == '' ) {
 			$FormSession->addToErrorBag( 'register_error', 'email_not_valid' )->redirect();
@@ -98,7 +97,7 @@ class User {
 			$FormSession->addToErrorBag( 'register_error', 'user_exists' )->redirect();
 		}
 
-		if ( sanitize_text_field( $_POST['agb'] ) != 'on' ) {
+		if ( sanitize_text_field( $_POST['agb'] ) != 'true' ) {
 			$FormSession->addToErrorBag( 'register_error', 'agb' )->redirect();
 		}
 
@@ -340,7 +339,7 @@ class User {
 		if(!empty($_POST['redirect'])){
 			wp_safe_redirect($_POST['redirect']);
 		}else{
-			wp_safe_redirect(get_field('field_601bc4580a4fc', 'option'));
+				wp_safe_redirect(get_field('field_601bc4580a4fc', 'option'));
 		}
 	}
 
@@ -381,7 +380,7 @@ class User {
 		if ( get_user_by( 'email', sanitize_email( $_POST['email'] ) ) ) {
 			wp_die( 'success' );
 		} else {
-			wp_die( 'not find', 400 );
+			wp_die( 'nope', 400 );
 		}
 	}
 
