@@ -213,7 +213,10 @@ html {
 
 .reb-input{
   @apply relative mb-10;
-  input{
-    @apply border-b border-white text-white bg-logo block p-2 w-full font-bold;
+  input, select{
+    @apply border-b border-white text-white bg-logo block p-2 w-full font-bold focus:outline-none outline-none rounded-none;
+  }
+  select{
+    @apply py-2 h-full;
   }
 }

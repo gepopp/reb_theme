@@ -320,6 +320,7 @@ class User {
 		}
 
 		$roles = $user->roles;
+
 		if (in_array('registered', $roles)) {
 			$FormSession->addToErrorBag('login_errror', 'not_activated')->redirect();
 		}

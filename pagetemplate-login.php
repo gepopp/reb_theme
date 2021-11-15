@@ -19,16 +19,16 @@ global $FormSession;
         <div class="h-auto" x-data="loginForm(login_data)">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
                 <div class="bg-black text-white p-5 shadow-xl lg:w-96">
-                    <h3 class="text-2xl font-medium mb-4 uppercase font-bold">
+                    <h1 class="text-2xl mb-4 uppercase font-bold">
                         <?php _e('login', 'reb_domain') ?>
-                    </h3>
+                    </h1>
                     <?php get_template_part('login', 'form') ?>
                 </div>
-                <div>
+                <div class="order-first lg:order-last">
                     <h1 class="text-3xl font-bold mb-5">
                         <?php the_title() ?>
                     </h1>
-                    <div>
+                    <div class="content">
                         <?php the_content(); ?>
                     </div>
                 </div>
