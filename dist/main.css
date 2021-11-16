@@ -592,8 +592,6 @@ video {
 @media (min-width: 768px) {
   .container {
     max-width: 768px;
-    padding-right: 0rem;
-    padding-left: 0rem;
   }
 }
 @media (min-width: 1024px) {
@@ -846,6 +844,10 @@ video {
   margin-top: 1.25rem;
 }
 
+.mb-20 {
+  margin-bottom: 5rem;
+}
+
 .-ml-5 {
   margin-left: -1.25rem;
 }
@@ -872,10 +874,6 @@ video {
 
 .-mt-100 {
   margin-top: -100%;
-}
-
-.mb-20 {
-  margin-bottom: 5rem;
 }
 
 .ml-10 {
@@ -1080,10 +1078,6 @@ video {
 
 .h-5 {
   height: 1.25rem;
-}
-
-.min-h-full {
-  min-height: 100%;
 }
 
 .min-h-screen {
@@ -1564,6 +1558,11 @@ video {
   border-color: rgba(26, 26, 24, var(--tw-border-opacity));
 }
 
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgba(0, 0, 0, var(--tw-border-opacity));
+}
+
 .border-gray-900 {
   --tw-border-opacity: 1;
   border-color: rgba(17, 24, 39, var(--tw-border-opacity));
@@ -1657,10 +1656,6 @@ video {
 
 .bg-opacity-75 {
   --tw-bg-opacity: 0.75;
-}
-
-.bg-opacity-90 {
-  --tw-bg-opacity: 0.9;
 }
 
 .bg-gradient-to-b {
@@ -1805,6 +1800,18 @@ video {
 
 .pb-3 {
   padding-bottom: 0.75rem;
+}
+
+.pr-0 {
+  padding-right: 0px;
+}
+
+.pl-0 {
+  padding-left: 0px;
+}
+
+.pt-3 {
+  padding-top: 0.75rem;
 }
 
 .pt-4 {
@@ -2009,6 +2016,11 @@ video {
   color: rgba(55, 65, 81, var(--tw-text-opacity));
 }
 
+.text-gray-900 {
+  --tw-text-opacity: 1;
+  color: rgba(17, 24, 39, var(--tw-text-opacity));
+}
+
 .text-warning {
   --tw-text-opacity: 1;
   color: rgba(245, 63, 57, var(--tw-text-opacity));
@@ -2022,11 +2034,6 @@ video {
 .text-black {
   --tw-text-opacity: 1;
   color: rgba(0, 0, 0, var(--tw-text-opacity));
-}
-
-.text-gray-900 {
-  --tw-text-opacity: 1;
-  color: rgba(17, 24, 39, var(--tw-text-opacity));
 }
 
 .text-gray-500 {
@@ -2869,10 +2876,6 @@ html {
     width: auto;
   }
 
-  .md\:w-48 {
-    width: 12rem;
-  }
-
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -3001,6 +3004,10 @@ html {
     height: 6rem;
   }
 
+  .lg\:w-48 {
+    width: 12rem;
+  }
+
   .lg\:w-64 {
     width: 16rem;
   }
@@ -3050,12 +3057,12 @@ html {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .lg\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .lg\:flex-row {
@@ -3152,6 +3159,10 @@ html {
 @media (min-width: 1280px) {
   .xl\:col-span-1 {
     grid-column: span 1/span 1;
+  }
+
+  .xl\:-mt-36 {
+    margin-top: -9rem;
   }
 
   .xl\:block {

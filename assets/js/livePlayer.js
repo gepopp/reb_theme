@@ -13,20 +13,8 @@ window.liveplayer = (preroll, stream, video) => {
         chapters: [],
         current_chapter: 0,
         tab: 'chapters',
-        init() {
-            maxHeight = document.getElementById('videoContainer').offsetHeight + 'px';
-            new ResizeObserver(() => {
-                maxHeight = document.getElementById('videoContainer').offsetHeight + 'px';
-            }).observe(document.getElementById('videoContainer'));
-
-
+        initPlayer() {
             this.loadSrc();
-
-            document.addEventListener('scroll', function () {
-                out = !isInViewport(document.querySelector('#outer'));
-            }, {
-                passive: true
-            });
         },
         loadSrc(gotoClip = false) {
 
@@ -96,6 +84,7 @@ window.liveplayer = (preroll, stream, video) => {
                     this.loadClip();
                 }
             });
+
         },
         formatStart(second) {
             return new Date(second * 1000).toISOString().substr(14, 5);

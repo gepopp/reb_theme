@@ -35,10 +35,10 @@ language_attributes(); ?>>
     <meta property="og:image" content="<?php the_post_thumbnail_url( 'article' ); ?>"/>
     <meta property="og:image:width" content="600"/>
     <meta property="og:image:height" content="450"/>
+
     <script src="https://player.vimeo.com/api/player.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-135909385-1"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script>
 
@@ -61,7 +61,7 @@ language_attributes(); ?>>
     <div class="flex justify-between w-full">
         <div class="logo-holder p-8">
             <a href="<?php echo home_url() ?>">
-                <img src="<?php echo get_stylesheet_directory_uri() ?>/assets/images/real-estate-brand-institute_logo_talks.svg" class="w-36 md:w-48 lg:w-64"/>
+                <img src="<?php echo get_stylesheet_directory_uri() ?>/assets/images/real-estate-brand-institute_logo_talks.svg" class="w-36 lg:w-48 lg:w-64"/>
             </a>
         </div>
         <div class="p-8 text-logo">
@@ -149,4 +149,4 @@ language_attributes(); ?>>
         </div>
     </div>
 </header>
-<main>
+<main class="xl:-mt-36">

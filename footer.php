@@ -21,7 +21,7 @@ namespace reb_livestream_theme;
         made by <a href="https://poppgerhard.at" target="_blank">poppgerhard</a>
     </div>
 </footer>
-<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <?php wp_footer(); ?>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </body>
 </html>
