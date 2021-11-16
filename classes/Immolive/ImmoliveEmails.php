@@ -69,11 +69,16 @@ trait ImmoliveEmails {
 
 		$termin = get_field( 'field_5ed527e9c2279', $immolive_id );
 		$termin = new Carbon( $termin );
-		if ( $termin->isPast() ) {
+
+        if ( $termin->isPast() ) {
 			return;
 		}
 
-		$result = wp_remote_post( sprintf( 'https://api.createsend.com/api/v3.2/lists/%s.json', '5dc7a00de27aa7df766faac083551a60' ), [
+        $client_id  = get_field('field_61938af4c1fcf', 'option');
+        $url = sprintf( 'https://api.createsend.com/api/v3.2/lists/%s.json', $client_id );
+
+
+		$result = wp_remote_post( $url, [
 			'headers' => CampaignMonitor::get_authorization_header(),
 			'body'    => json_encode( [
 				"Title"              => get_the_title( $immolive_id ) . ' ' . get_field( 'field_5ed527e9c2279', $immolive_id ),

@@ -29,8 +29,11 @@ class CampaignMonitor {
 
 
 		if ( empty( $this->transactionalIds[ $template ] ) ) {
+
 			$fallback = 'fallback_mail_' . $template;
+
 			return $this->$fallback( $user, $args, $attachment );
+
 		} else {
 			$url = sprintf( 'https://api.createsend.com/api/v3.2/transactional/smartEmail/%s/send', $this->transactionalIds[ $template ] );
 
@@ -87,20 +90,23 @@ class CampaignMonitor {
 			return true;
 		} else {
 			wp_mail( 'gerhard@poppgerhard.at', 'CM Fehler', print_r( wp_remote_retrieve_body( $result ), true ) );
+
 			return false;
 		}
 	}
 
+
 	public static function get_authorization_header() {
 		return [
-			'authorization' => 'Basic ' . base64_encode( 'fab3e169a5a467b38347a38dbfaaad6d' ),
+			'authorization' => 'Basic ' . base64_encode( get_field('field_619276110f7be', 'option') ),
 		];
 	}
 
+
 	function fallback_mail_confirm_email_address( $user, $args, $attachment ) {
 
-		$home    = home_url();
-		$link    = $args['link'];
+		$home = home_url();
+		$link = $args['link'];
 
 		$content = <<<EOM
 Guten Tag,
@@ -114,15 +120,13 @@ Ihr Real Estate Brand Talk Team
  
 EOM;
 
-		return wp_mail($user->data->user_email, 'Schliessen Sie Ihre Registrierung ab', $content );
-
-
+		return wp_mail( $user->data->user_email, 'Schliessen Sie Ihre Registrierung ab', $content );
 	}
 
 
 	function fallback_mail_registration_activated( $user, $args, $attachment ) {
 
-		$home    = home_url();
+		$home = home_url();
 
 
 		$content = <<<EOM
@@ -136,17 +140,17 @@ Ihr Real Estate Brand Talk Team
  
 EOM;
 
-		return wp_mail($user->data->user_email, 'Herzllich willkommen.', $content );
+		return wp_mail( $user->data->user_email, 'Herzllich willkommen.', $content );
 
 
 	}
 
 
-function fallback_mail_reset_password( $user, $args, $attachment){
-	$home    = home_url();
-	$link    = $args['link'];
+	function fallback_mail_reset_password( $user, $args, $attachment ) {
+		$home = home_url();
+		$link = $args['link'];
 
-	$content = <<<EOM
+		$content = <<<EOM
 Guten Tag,
 vielen Dank, bitte folgen Sie diesem Link: $link
 um Ihr Passwort auf $home zurückzusetzen.
@@ -157,7 +161,7 @@ Ihr Real Estate Brand Talk Team
  
 EOM;
 
-	return wp_mail($user->data->user_email, 'Passwort zurücksetzten', $content );
-}
+		return wp_mail( $user->data->user_email, 'Passwort zurücksetzten', $content );
+	}
 
 }

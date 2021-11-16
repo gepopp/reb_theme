@@ -199,6 +199,8 @@ class User {
 		}
 
 		public function sentUserActivationToken( \WP_User $user ) {
+
+
 			global $wpdb;
 			$table = 'wp_user_activation_token';
 

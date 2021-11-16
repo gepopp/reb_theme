@@ -1,5 +1,8 @@
-<div class="pt-5">
-    <h3 class="font-semibold text-primary-100 font-serif text-xl text-center">Zu diesem Livestream anmelden</h3>
+<div class="bg-black text-white relative">
+
+    <h3 class="font-semibold text-primary-100 font-serif text-xl text-center">
+        Zu diesem Livestream anmelden
+    </h3>
     <p class="text-sm my-3">
         Um bei unseren Podiumsdiskussionen und Interviews live dabei sein zu können, ist eine Anmeldung erforderlich. Erstellen Sie jetzt Ihren Account auf der Immobilien Redaktion und melden Sie sich an.
     </p>

@@ -3,6 +3,25 @@
     "title": "Campaign monitor transactional templates",
     "fields": [
         {
+            "key": "field_61938af4c1fcf",
+            "label": "CM Client ID",
+            "name": "cm_client_id",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_619276110f7be",
             "label": "CM API Key",
             "name": "cm_api_key",
@@ -172,5 +191,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1636990048
+    "show_in_rest": 0,
+    "modified": 1637059346
 }
