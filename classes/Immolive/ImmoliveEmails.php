@@ -165,7 +165,7 @@ trait ImmoliveEmails {
 		$campaign = wp_remote_post( sprintf( 'https://api.createsend.com/api/v3.2/campaigns/%s/fromtemplate.json', get_field( 'field_61938af4c1fcf', 'option' ) ), [
 			'headers' => CampaignMonitor::get_authorization_header(),
 			'body'    => json_encode( [
-				"Name"            => __( 'Livestream Reminder: ', 'reb_domain' ) . get_the_title( $immolive_id ),
+				"Name"            => __( 'REMINDER:  ', 'reb_domain' ) . get_the_title( $immolive_id ),
 				"Subject"         => get_the_title( $immolive_id ),
 				"FromName"        => "brandtalks reb institute",
 				"FromEmail"       => "noreply@reb.institute",
@@ -174,22 +174,22 @@ trait ImmoliveEmails {
 					trim( get_post_meta( $immolive_id, 'cm_list', true ), '"' ),
 				],
 				"TemplateID"      => "db7689496dba3f028dcb75a7e4de3a8b",
-				"TemplateContent" => [
-					"Multilines" => [
-						[
-							"Content" => "<p>Ihr ImmoLive beginnt in k&uuml;rze</p>",
-						],
-						[
-							"Content" => "<p style='font-weight: bold'>Beginn: " . get_field( 'field_5ed527e9c2279', $immolive_id ) . "</p>",
-						],
-						[
-							"Content" => "<p>" . get_the_title( $immolive_id ) . "</p>",
-						],
-						[
-							"Content" => "<p><strong>" . get_the_excerpt( $immolive_id ) . '</strong><br><br>' . get_the_content( $immolive_id ) . "</p>" . $list,
-						],
-					],
-				],
+//				"TemplateContent" => [
+//					"Multilines" => [
+//						[
+//							"Content" => "<p>Ihr ImmoLive beginnt in k&uuml;rze</p>",
+//						],
+//						[
+//							"Content" => "<p style='font-weight: bold'>Beginn: " . get_field( 'field_5ed527e9c2279', $immolive_id ) . "</p>",
+//						],
+//						[
+//							"Content" => "<p>" . get_the_title( $immolive_id ) . "</p>",
+//						],
+//						[
+//							"Content" => "<p><strong>" . get_the_excerpt( $immolive_id ) . '</strong><br><br>' . get_the_content( $immolive_id ) . "</p>" . $list,
+//						],
+//					],
+//				],
 			] ),
 		] );
 

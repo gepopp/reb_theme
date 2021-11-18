@@ -62,19 +62,19 @@ language_attributes(); ?>>
         <div class="logo-holder p-0 sm:p-4 md:p-6 lg:p-8">
             <a href="<?php echo home_url() ?>">
                 <img src="<?php echo get_stylesheet_directory_uri() ?>/assets/images/real-estate-brand-institute_logo.svg" class="w-24 md:w-36 lg:w-48 lg:w-64"/>
-                <p class="flex justify-between font-semibold text-lg md:text-2xl xl:text-3xl uppercase">
-                    <span>B</span>
-                    <span>r</span>
-                    <span>a</span>
-                    <span>n</span>
-                    <span>d</span>
-                    <span>&nbsp;</span>
-                    <span>T</span>
-                    <span>a</span>
-                    <span>l</span>
-                    <span>k</span>
-                    <span>s</span>
-                </p>
+<!--                <p class="flex justify-between font-semibold text-lg md:text-2xl xl:text-3xl uppercase">-->
+<!--                    <span>B</span>-->
+<!--                    <span>r</span>-->
+<!--                    <span>a</span>-->
+<!--                    <span>n</span>-->
+<!--                    <span>d</span>-->
+<!--                    <span>&nbsp;</span>-->
+<!--                    <span>T</span>-->
+<!--                    <span>a</span>-->
+<!--                    <span>l</span>-->
+<!--                    <span>k</span>-->
+<!--                    <span>s</span>-->
+<!--                </p>-->
             </a>
         </div>
         <div class="p-0 sm:p-4 md:p-6 lg:p-8">
