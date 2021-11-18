@@ -80,10 +80,23 @@ extract( $args );
                         <p class="text-gray-900 line-clamp-3">
 							<?php echo get_the_excerpt(); ?>
                         </p>
-                        <div class="flex justify-end">
-                            <a href="<?php the_permalink(); ?>" class="inline p-4">
-								<?php _e( 'more', 'reb_domain' ) ?>
+
+                        <div class="flex justify-between mt-3">
+                        <div>
+                            <?php if(get_field('field_6196833f81731')): ?>
+                                <a href="<?php the_field('field_6196833f81731'); ?>" class="inline-block bg-logo text-white py-2 px-3 leading-none">
+		                            <?php _e('survey', 'reb_domain') ?>
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                        <div>
+                            <a href="<?php the_permalink(); ?>" class="inline py-2">
+		                        <?php _e( 'more', 'reb_domain' ) ?>
                             </a>
+                        </div>
+
+
+
                         </div>
                     </div>
                     <div class="border-t border-primary-100 py-3">
