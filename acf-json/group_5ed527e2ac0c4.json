@@ -81,6 +81,22 @@
             "message": "",
             "new_lines": "wpautop",
             "esc_html": 0
+        },
+        {
+            "key": "field_6196833f81731",
+            "label": "Umfragelink",
+            "name": "umfragelink",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
         }
     ],
     "location": [
@@ -100,5 +116,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1636664697
+    "show_in_rest": 0,
+    "modified": 1637253974
 }

@@ -9,7 +9,7 @@ extract( $args );
 <div class="container mx-auto">
     <div class="my-5 w-full text-center">
         <h1 class="text-3xl font-bold mb-5">
-            <?php _e('Upcoming Events', 'reb_domain') ?>
+			<?php _e( 'Upcoming Events', 'reb_domain' ) ?>
         </h1>
     </div>
 
@@ -89,24 +89,54 @@ extract( $args );
                     <div class="border-t border-primary-100 py-3">
 
 						<?php if ( is_user_logged_in() ): ?>
-                            <a href="<?php the_permalink(); ?>"
-                               class="block w-full bg-logo text-center text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline">
-								<?php _e( 'participate', 'reb_domain' ) ?>
-                            </a>
+
+							<?php
+							$is_participant = [];
+							$participants   = get_field( 'field_601451bb66bc3' );
+
+							$user = wp_get_current_user();
+
+							if ( $participants ) {
+								$is_participant = array_filter( $participants, function ( $p ) {
+									$user = wp_get_current_user();
+									if ( trim( $p['user_email'] ) == $user->user_email ) {
+										return $p;
+									}
+								} );
+							}
+
+							if ( empty( $is_participant ) ):
+								?>
+
+
+                                <a href="<?php the_permalink(); ?>"
+                                   class="block w-full bg-logo text-center text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline">
+									<?php _e( 'participate', 'reb_domain' ) ?>
+                                </a>
+
+                            <?php else: ?>
+
+                                <p class="text-center py-2 ">
+                                    <?php _e('your are allready subscribed', 'reb_domain') ?>
+                                </p>
+
+							<?php endif; ?>
+
+
 						<?php else: ?>
 
                             <p class="text-center mb-4"><?php _e( 'To participate:' ) ?></p>
 							<?php
 							global $wp;
-							$redirect = home_url( $wp->request )
+						$redirect = home_url( $wp->request )
 							?>
-                            <a href="<?php echo add_query_arg( 'redirect', $redirect, get_field('field_601bbffe28967', 'option') ) ?>"
+                            <a href="<?php echo add_query_arg( 'redirect', $redirect, get_field( 'field_601bbffe28967', 'option' ) ) ?>"
                                class="block w-full bg-logo text-center text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline">
 								<?php _e( 'singin', 'reb_domain' ) ?>
                             </a>
                             <div class="flex justify-between">
                                 <span><?php _e( 'No account?', 'reb_domain' ) ?></span>
-                                <span><a href="<?php echo add_query_arg( 'redirect', $redirect, get_field('field_601bc00528968', 'option') ) ?>"><?php _e( 'register now' ) ?></a></span>
+                                <span><a href="<?php echo add_query_arg( 'redirect', $redirect, get_field( 'field_601bc00528968', 'option' ) ) ?>"><?php _e( 'register now' ) ?></a></span>
                             </div>
 						<?php endif; ?>
                     </div>

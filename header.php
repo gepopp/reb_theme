@@ -59,12 +59,25 @@ language_attributes(); ?>>
 
 <header class="header w-full">
     <div class="flex justify-between w-full">
-        <div class="logo-holder p-8">
+        <div class="logo-holder p-0 sm:p-4 md:p-6 lg:p-8">
             <a href="<?php echo home_url() ?>">
-                <img src="<?php echo get_stylesheet_directory_uri() ?>/assets/images/real-estate-brand-institute_logo_talks.svg" class="w-36 lg:w-48 lg:w-64"/>
+                <img src="<?php echo get_stylesheet_directory_uri() ?>/assets/images/real-estate-brand-institute_logo.svg" class="w-24 md:w-36 lg:w-48 lg:w-64"/>
+                <p class="flex justify-between font-semibold text-lg md:text-2xl xl:text-3xl uppercase">
+                    <span>B</span>
+                    <span>r</span>
+                    <span>a</span>
+                    <span>n</span>
+                    <span>d</span>
+                    <span>&nbsp;</span>
+                    <span>T</span>
+                    <span>a</span>
+                    <span>l</span>
+                    <span>k</span>
+                    <span>s</span>
+                </p>
             </a>
         </div>
-        <div class="p-8 text-logo">
+        <div class="p-0 sm:p-4 md:p-6 lg:p-8">
             <ul class="space-x-5 hidden md:flex">
 				<?php
 				if ( ! is_user_logged_in() ):
@@ -95,10 +108,13 @@ language_attributes(); ?>>
                     </a>
                 </li>
             </ul>
+
+
+
             <div x-data="{ show : false }" x-cloak>
-                <div class="p-8 md:hidden">
+                <div class="md:hidden">
                     <div @click="show = !show" x-show="!show">
-                        <svg class="w-12 h-12 text-logo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-8 h-8 text-logo mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </div>
@@ -108,9 +124,11 @@ language_attributes(); ?>>
                         </svg>
                     </div>
                 </div>
+
+
                 <div class="absolute top-0 right-0 h-screen border-l-2 border-logo bg-white z-50 p-8 shadow-2xl animate__animated animate__slideInRight md:hidden" x-show="show">
                     <ul class="flex flex-col h-full">
-                        <li @click="show = !show" class="w-full flex justify-end">
+                        <li @click="show = !show" class="">
                             <svg class="w-12 h-12 text-logo" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
@@ -145,6 +163,7 @@ language_attributes(); ?>>
                         </li>
                     </ul>
                 </div>
+
             </div>
         </div>
     </div>

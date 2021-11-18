@@ -20,13 +20,13 @@ class User {
 		add_action( 'wp_ajax_user_exists', [ $this, 'ajax_user_exists' ] );
 		add_action( 'wp_ajax_update_reading_log', [ $this, 'update_reading_log' ] );
 		add_action( 'wp_ajax_load_log', [ $this, 'load_reading_log' ] );
-		add_filter('pre_get_avatar_data', [$this, 'acf_profile_avatar'], 10, 2);
-		add_action('admin_post_frontent_logout', [$this, 'post_frontend_logout'] );
-		add_action('admin_post_nopriv_frontend_login', [$this, 'frontend_login']);
-		add_action('admin_post_nopriv_new_password', [$this, 'new_password']);
-		add_action('admin_post_nopriv_frontend_reset_password', [$this, 'reset_password']);
-		add_action( 'admin_post_nopriv_frontend_register', [$this, 'frontend_register']);
-		add_action( 'admin_post_nopriv_resend_activation', [$this, 'resend_acitvation_link']);
+		add_filter( 'pre_get_avatar_data', [ $this, 'acf_profile_avatar' ], 10, 2 );
+		add_action( 'admin_post_frontent_logout', [ $this, 'post_frontend_logout' ] );
+		add_action( 'admin_post_nopriv_frontend_login', [ $this, 'frontend_login' ] );
+		add_action( 'admin_post_nopriv_new_password', [ $this, 'new_password' ] );
+		add_action( 'admin_post_nopriv_frontend_reset_password', [ $this, 'reset_password' ] );
+		add_action( 'admin_post_nopriv_frontend_register', [ $this, 'frontend_register' ] );
+		add_action( 'admin_post_nopriv_resend_activation', [ $this, 'resend_acitvation_link' ] );
 	}
 
 	public function resend_acitvation_link() {
@@ -57,7 +57,6 @@ class User {
 	}
 
 
-
 	public function frontend_register() {
 
 
@@ -70,14 +69,14 @@ class User {
 		$password  = sanitize_text_field( $_POST['password'] );
 
 		$response = wp_remote_post( sprintf( 'https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s',
-			get_field('field_6192780b4967b', 'option'),
+			get_field( 'field_6192780b4967b', 'option' ),
 			sanitize_text_field( $_POST['grecaptcha'] )
 		) );
 
 
-		$captcha_response = json_decode(wp_remote_retrieve_body($response));
+		$captcha_response = json_decode( wp_remote_retrieve_body( $response ) );
 
-		if( !isset($captcha_response->success) || !$captcha_response->success ) {
+		if ( ! isset( $captcha_response->success ) || ! $captcha_response->success ) {
 			$FormSession->addToErrorBag( 'register_error', 'nonce' )->redirect();
 			exit;
 		}
@@ -159,199 +158,206 @@ class User {
 
 
 	function activate_user() {
-			global $FormSession;
+		global $FormSession;
 
-			$token = sanitize_text_field( $_GET['token'] );
+		$token = sanitize_text_field( $_GET['token'] );
 
-			if ( $token == '' ) {
-				return;
-			}
-			global $wpdb;
+		if ( $token == '' ) {
+			return;
+		}
+		global $wpdb;
 
-			$table = 'wp_user_activation_token';
+		$table = 'wp_user_activation_token';
 
-			$email = $wpdb->get_var( 'SELECT email FROM ' . $table . ' WHERE token = "' . $token . '"' );
+		$email = $wpdb->get_var( 'SELECT email FROM ' . $table . ' WHERE token = "' . $token . '"' );
 
 
-			$token_user = get_user_by( 'email', $email );
+		$token_user = get_user_by( 'email', $email );
 
-			if ( ! $token_user ) {
-				$FormSession->addToErrorBag( 'login_errror', 'token_expired' );
-
-				return;
-			}
-
-			if ( ! in_array( 'subscriber', $token_user->roles ) ) {
-
-				$token_user->add_role( 'subscriber' );
-				$token_user->remove_role( 'registered' );
-
-				$cm = new CampaignMonitor();
-				$cm->transactional( 'registration_activated', $token_user );
-				$cm->updateUser( $token_user );
-				$FormSession->set( 'token_success', 'account_acitvated' );
-
-				return;
-			}
+		if ( ! $token_user ) {
 			$FormSession->addToErrorBag( 'login_errror', 'token_expired' );
 
 			return;
 		}
 
-		public function sentUserActivationToken( \WP_User $user ) {
+		if ( ! in_array( 'subscriber', $token_user->roles ) ) {
 
+			$token_user->add_role( 'subscriber' );
+			$token_user->remove_role( 'registered' );
 
-			global $wpdb;
-			$table = 'wp_user_activation_token';
-
-			$last_token = $wpdb->get_var( sprintf( 'SELECT created_at FROM %s WHERE email = "%s" ORDER BY created_at DESC LIMIT 1', $table, $user->user_email ) );
-
-			if ( $last_token && Carbon::now()->diffInMinutes( Carbon::parse( $last_token ) ) < 5 ) {
-				return false;
-			}
-
-			$wpdb->delete( $table, [ 'email' => $user->data->user_email ] );
-			$token = wp_generate_uuid4();
-
-			$redirect = sanitize_text_field( $_POST['redirect'] ) ?? '';
-
-			$wpdb->insert( $table, [
-				'user_id'  => $user->ID,
-				'email'    => $user->data->user_email,
-				'token'    => $token,
-				'redirect' => $redirect,
-			],
-				[ '%d', '%s', '%s', '%s' ] );
-
-			return ( new CampaignMonitor() )->transactional(
-				'confirm_email_address',
-				$user,
+			$cm = new CampaignMonitor();
+			$cm->transactional(
+				'registration_activated',
+				$token_user,
 				[
-					'link' => add_query_arg( [
-						'token'    => $token,
-						'redirect' => $redirect,
-					], get_field( 'field_601bbffe28967', 'option' ) ),
+					'link' => get_field( 'field_601bbffe28967', 'option' ),
 				]
 			);
+			$cm->updateUser( $token_user );
+			$FormSession->set( 'token_success', 'account_acitvated' );
+
+			return;
+		}
+		$FormSession->addToErrorBag( 'login_errror', 'token_expired' );
+
+		return;
+	}
+
+
+	public function sentUserActivationToken( \WP_User $user ) {
+
+
+		global $wpdb;
+		$table = 'wp_user_activation_token';
+
+		$last_token = $wpdb->get_var( sprintf( 'SELECT created_at FROM %s WHERE email = "%s" ORDER BY created_at DESC LIMIT 1', $table, $user->user_email ) );
+
+		if ( $last_token && Carbon::now()->diffInMinutes( Carbon::parse( $last_token ) ) < 5 ) {
+			return false;
 		}
 
+		$wpdb->delete( $table, [ 'email' => $user->data->user_email ] );
+		$token = wp_generate_uuid4();
 
+		$redirect = sanitize_text_field( $_POST['redirect'] ) ?? '';
 
+		$wpdb->insert( $table, [
+			'user_id'  => $user->ID,
+			'email'    => $user->data->user_email,
+			'token'    => $token,
+			'redirect' => $redirect,
+		],
+			[ '%d', '%s', '%s', '%s' ] );
+
+		return ( new CampaignMonitor() )->transactional(
+			'confirm_email_address',
+			$user,
+			[
+				'link' => add_query_arg( [
+					'token'    => $token,
+					'redirect' => $redirect,
+				], get_field( 'field_601bbffe28967', 'option' ) ),
+			]
+		);
+	}
 
 
 	public function new_password() {
 
 		global $FormSession;
 
-		if (!wp_verify_nonce(sanitize_text_field($_POST['new_password']), 'new_password')) {
-			$FormSession->addToErrorBag('frontend_reset_password', 'nonce')->redirect();
+		if ( ! wp_verify_nonce( sanitize_text_field( $_POST['new_password'] ), 'new_password' ) ) {
+			$FormSession->addToErrorBag( 'frontend_reset_password', 'nonce' )->redirect();
 		}
 
 		global $wpdb;
-		$user = get_user_by('email', sanitize_email($_POST['email']));
+		$user = get_user_by( 'email', sanitize_email( $_POST['email'] ) );
 
-		if (!$user) {
-			$FormSession->addToErrorBag('frontend_reset_password', 'register_error')->redirect();
+		if ( ! $user ) {
+			$FormSession->addToErrorBag( 'frontend_reset_password', 'register_error' )->redirect();
 		}
 
-		if (!in_array('subscriber', $user->roles)) {
-			$user->add_role('subscriber');
-			$user->remove_role('registered');
+		if ( ! in_array( 'subscriber', $user->roles ) && ! in_array('administrator', $user->roles) ) {
+			$user->add_role( 'subscriber' );
+			$user->remove_role( 'registered' );
 		}
 
-		wp_set_password(sanitize_text_field($_POST['pw']), $user->ID);
+		wp_set_password( sanitize_text_field( $_POST['pw'] ), $user->ID );
 
-		$FormSession->set('token_success', 'password_changed')->redirect(get_field('field_601bbffe28967', 'option'));
+		$FormSession->set( 'token_success', 'password_changed' )->redirect( get_field( 'field_601bbffe28967', 'option' ) );
 
 	}
+
 
 	public function reset_password() {
 
 		global $FormSession;
 
-		if (!wp_verify_nonce(sanitize_text_field($_POST['reset_password']), 'reset_password')) {
-			$FormSession->addToErrorBag('passwort_reset_error', 'nonce')->redirect();
+		if ( ! wp_verify_nonce( sanitize_text_field( $_POST['reset_password'] ), 'reset_password' ) ) {
+			$FormSession->addToErrorBag( 'passwort_reset_error', 'nonce' )->redirect();
 		}
 
-		$user = get_user_by('email', sanitize_email($_POST['email']));
+		$user = get_user_by( 'email', sanitize_email( $_POST['email'] ) );
 
-		if (!$user) {
-			$FormSession->addToErrorBag('passwort_reset_error', 'email_not_found')->redirect();
+		if ( ! $user ) {
+			$FormSession->addToErrorBag( 'passwort_reset_error', 'email_not_found' )->redirect();
 		}
 
 		global $wpdb;
 		$table = 'wp_user_activation_token';
 
-		$wpdb->delete($table, ['email' => $user->data->user_email]);
+		$wpdb->delete( $table, [ 'email' => $user->data->user_email ] );
 
 		$token = wp_generate_uuid4();
 
-		$wpdb->insert($table, [
+		$wpdb->insert( $table, [
 			'user_id'    => $user->ID,
 			'email'      => $user->data->user_email,
 			'token'      => $token,
-			'created_at' => \Carbon\Carbon::now()->format('d.m.Y H:i:s'),
+			'created_at' => \Carbon\Carbon::now()->format( 'd.m.Y H:i:s' ),
 		],
-			['%d', '%s', '%s', '%s']);
+			[ '%d', '%s', '%s', '%s' ] );
 
-		$sent = (new CampaignMonitor())->transactional('reset_password', $user, ['link' => add_query_arg(['token' => $token], get_field('field_601e5b029887d', 'option'))]);
+		$sent = ( new CampaignMonitor() )->transactional(
+			'reset_password',
+			$user,
+			[
+				'link'  => add_query_arg( [ 'token' => $token ], get_field( 'field_601e5b029887d', 'option' ) ),
+				'email' => $user->user_email,
+			] );
 
-		if ($sent) {
-			$FormSession->set('passwort_reset', 'reset_success')->redirect();
+		if ( $sent ) {
+			$FormSession->set( 'passwort_reset', 'reset_success' )->redirect();
 		} else {
-			$FormSession->addToErrorBag('passwort_reset_error', 'register_error')->redirect();
+			$FormSession->addToErrorBag( 'passwort_reset_error', 'register_error' )->redirect();
 		}
 
 	}
-
-
 
 
 	public function frontend_login() {
 
 		global $FormSession;
 
-		if (!wp_verify_nonce(sanitize_text_field($_POST['frontend_login']), 'frontend_login')) {
-			$FormSession->addToErrorBag('login_errror', 'nonce')->redirect();
+		if ( ! wp_verify_nonce( sanitize_text_field( $_POST['frontend_login'] ), 'frontend_login' ) ) {
+			$FormSession->addToErrorBag( 'login_errror', 'nonce' )->redirect();
 		}
 
-		$user = get_user_by('email', sanitize_email($_POST['email']));
-		if(!$user){
-			$FormSession->addToErrorBag('login_errror', 'login_credentials')->redirect();
+		$user = get_user_by( 'email', sanitize_email( $_POST['email'] ) );
+		if ( ! $user ) {
+			$FormSession->addToErrorBag( 'login_errror', 'login_credentials' )->redirect();
 		}
 
 		$roles = $user->roles;
 
-		if (in_array('registered', $roles)) {
-			$FormSession->addToErrorBag('login_errror', 'not_activated')->redirect();
+		if ( in_array( 'registered', $roles ) ) {
+			$FormSession->addToErrorBag( 'login_errror', 'not_activated' )->redirect();
 		}
 
-		$user = wp_signon([
-			'user_login'    => sanitize_email($_POST['email']),
-			'user_password' => sanitize_text_field($_POST['password']),
-			'remember'      => isset($_POST['remember']) ? (bool)$_POST['remember'] : false,
-		], true);
-		wp_set_current_user($user);
+		$user = wp_signon( [
+			'user_login'    => sanitize_email( $_POST['email'] ),
+			'user_password' => sanitize_text_field( $_POST['password'] ),
+			'remember'      => isset( $_POST['remember'] ) ? (bool) $_POST['remember'] : false,
+		], true );
+		wp_set_current_user( $user );
 
 
-		if (is_wp_error($user)) {
-			$FormSession->addToErrorBag('login_errror', 'login_credentials')->redirect();
+		if ( is_wp_error( $user ) ) {
+			$FormSession->addToErrorBag( 'login_errror', 'login_credentials' )->redirect();
 		}
 
-		if(!empty($_POST['redirect'])){
-			wp_safe_redirect($_POST['redirect']);
-		}else{
-				wp_safe_redirect(get_field('field_601bc4580a4fc', 'option'));
+		if ( ! empty( $_POST['redirect'] ) ) {
+			wp_safe_redirect( $_POST['redirect'] );
+		} else {
+			wp_safe_redirect( get_field( 'field_601bc4580a4fc', 'option' ) );
 		}
 	}
 
 
-	public function post_frontend_logout(){
+	public function post_frontend_logout() {
 		wp_logout();
-		wp_safe_redirect(home_url());
+		wp_safe_redirect( home_url() );
 	}
-
-
 
 
 	public function alter_capabilities() {
@@ -365,8 +371,6 @@ class User {
 	}
 
 
-
-
 	public function hide_admin_bar() {
 		if ( ! current_user_can( 'administrator' ) ) {
 			return false;
@@ -376,8 +380,6 @@ class User {
 	}
 
 
-
-
 	public function ajax_user_exists() {
 		if ( get_user_by( 'email', sanitize_email( $_POST['email'] ) ) ) {
 			wp_die( 'success' );
@@ -385,8 +387,6 @@ class User {
 			wp_die( 'nope', 400 );
 		}
 	}
-
-
 
 
 	public function update_reading_log() {
@@ -420,8 +420,6 @@ class User {
 			wp_die( $depth );
 		}
 	}
-
-
 
 
 	public function load_reading_log() {
@@ -463,8 +461,6 @@ class User {
 	}
 
 
-
-
 	public function acf_profile_avatar( $args, $id_or_email ) {
 
 		if ( $id_or_email instanceof \WP_Comment ) {
@@ -476,19 +472,19 @@ class User {
 			}
 
 			// Get the file id
-			$image = get_field('field_5ded37c474589', 'user_' . $user->ID); // CHANGE TO YOUR FIELD NAME
+			$image = get_field( 'field_5ded37c474589', 'user_' . $user->ID ); // CHANGE TO YOUR FIELD NAME
 
 
 			//wp_die(var_dump($image));
 
 			// Bail if we don't have a local avatar
-			if ( ! $image) {
+			if ( ! $image ) {
 				return $args;
 			}
 
 			$image_id = $image['ID'];
 
-			switch ($args['size']){
+			switch ( $args['size'] ) {
 				case 24:
 					$args['url'] = $image['sizes']['author_extra_small'] ?? $image['url'];
 					break;

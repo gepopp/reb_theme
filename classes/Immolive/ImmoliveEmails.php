@@ -70,12 +70,12 @@ trait ImmoliveEmails {
 		$termin = get_field( 'field_5ed527e9c2279', $immolive_id );
 		$termin = new Carbon( $termin );
 
-        if ( $termin->isPast() ) {
+		if ( $termin->isPast() ) {
 			return;
 		}
 
-        $client_id  = get_field('field_61938af4c1fcf', 'option');
-        $url = sprintf( 'https://api.createsend.com/api/v3.2/lists/%s.json', $client_id );
+		$client_id = get_field( 'field_61938af4c1fcf', 'option' );
+		$url       = sprintf( 'https://api.createsend.com/api/v3.2/lists/%s.json', $client_id );
 
 
 		$result = wp_remote_post( $url, [
@@ -123,17 +123,29 @@ trait ImmoliveEmails {
 		}
 
 		$termin = get_field( 'field_5ed527e9c2279', $immolive_id );
+
 		$termin = new Carbon( $termin );
 		if ( $termin->isPast() ) {
 			return;
 		}
 
 		$list_id = trim( get_post_meta( $immolive_id, 'cm_list', true ), '"' );
+
 		if ( empty( $list_id ) ) {
 			return;
 		}
 
+
+//		$templates = wp_remote_get( sprintf( 'https://api.createsend.com/api/v3.2/clients/%s/templates.json', get_field( 'field_61938af4c1fcf', 'option' ) ), [
+//			'headers' => CampaignMonitor::get_authorization_header(),
+//		] );
+//
+//        $body = wp_remote_retrieve_body($templates);
+//
+//        wp_die(var_dump($body));
+
 		$teilnehmer = get_field( 'field_614ad5e239622', $immolive_id );
+
 		ob_start();
 		?>
         <h3>Unsere Expert*innen im Livestream:</h3>
@@ -149,18 +161,19 @@ trait ImmoliveEmails {
 		<?php
 		$list = ob_get_clean();
 
-		$campaign = wp_remote_post( 'https://api.createsend.com/api/v3.2/campaigns/5dc7a00de27aa7df766faac083551a60/fromtemplate.json', [
+
+		$campaign = wp_remote_post( sprintf( 'https://api.createsend.com/api/v3.2/campaigns/%s/fromtemplate.json', get_field( 'field_61938af4c1fcf', 'option' ) ), [
 			'headers' => CampaignMonitor::get_authorization_header(),
 			'body'    => json_encode( [
-				"Name"            => "Immolive Reminder: " . get_the_title( $immolive_id ),
+				"Name"            => __( 'Livestream Reminder: ', 'reb_domain' ) . get_the_title( $immolive_id ),
 				"Subject"         => get_the_title( $immolive_id ),
-				"FromName"        => "Walter Senk",
-				"FromEmail"       => "w.senk@immobilien-redaktion.at",
-				"ReplyTo"         => "w.senk@immobilien-redaktion.at",
+				"FromName"        => "brandtalks reb institute",
+				"FromEmail"       => "noreply@reb.institute",
+				"ReplyTo"         => "noreply@reb.institute",
 				"ListIDs"         => [
 					trim( get_post_meta( $immolive_id, 'cm_list', true ), '"' ),
 				],
-				"TemplateID"      => "eb65278b73faad49e37616814eeb2a68",
+				"TemplateID"      => "db7689496dba3f028dcb75a7e4de3a8b",
 				"TemplateContent" => [
 					"Multilines" => [
 						[
@@ -174,13 +187,6 @@ trait ImmoliveEmails {
 						],
 						[
 							"Content" => "<p><strong>" . get_the_excerpt( $immolive_id ) . '</strong><br><br>' . get_the_content( $immolive_id ) . "</p>" . $list,
-						],
-					],
-					"Images"     => [
-						[
-							"Content" => get_the_post_thumbnail_url( $immolive_id, 'full' ),
-							"Alt"     => get_the_title( $immolive_id ),
-							"Href"    => get_the_permalink( $immolive_id ),
 						],
 					],
 				],

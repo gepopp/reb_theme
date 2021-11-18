@@ -58,7 +58,7 @@ class PageViews {
 
 
 		} else {
-			wp_die('no json');
+			wp_die(0);
 		}
 	}
 

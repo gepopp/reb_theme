@@ -20,8 +20,6 @@ class ImmoliveSubscription {
 	}
 
 
-
-
 	public function is_subscribed(){
 
 		if ( ! wp_verify_nonce( sanitize_text_field( $_POST['nonce'] ), 'wp_rest' ) ) {
@@ -38,10 +36,6 @@ class ImmoliveSubscription {
 		wp_die(false);
 
 	}
-
-
-
-
 
 
 	public function subscribe() {
@@ -80,17 +74,6 @@ class ImmoliveSubscription {
 
 		if ( $added ) {
 
-			if(!empty($question)){
-				wp_insert_comment([
-					'comment_author' => $user->display_name,
-					'comment_author_email' => $user->user_email,
-					'comment_content' => $question,
-					'comment_post_ID' => $immolive_id,
-					'user_id'   => $user->ID
-				]);
-			}
-
-
 			$this->send_subscription_email( $user->display_name, $user->user_email, $immolive_id );
 			wp_die( 'Anmeldung erfolgreich!' );
 
@@ -99,7 +82,5 @@ class ImmoliveSubscription {
 		}
 
 	}
-
-
 
 }
