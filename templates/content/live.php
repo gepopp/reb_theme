@@ -31,12 +31,16 @@ $termin = new \Carbon\Carbon( get_field( 'field_5ed527e9c2279' ) );
 
 	<?php
 	$experts = get_field( 'field_6197cdea9e8c3' );
+
 	if ( $experts ):
+
+        $cols = max(3, count($experts) );
+
 		?>
 
 
         <div class="container mx-auto text-black lg:px-0">
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+            <div class="grid grid-cols-2 md:grid-cols-<?php echo $cols ?> gap-3">
 				<?php
 				foreach ( $experts as $expert ):
 					$iframe = $expert['experten_video_'];
