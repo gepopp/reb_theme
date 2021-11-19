@@ -71,9 +71,13 @@ extract( $args );
                     </a>
                 </div>
                 <div class="w-full p-3 bg-white border border-primary-100">
-                    <div class="flex justify-between border-b font-semibold text-primary-100 border-primary-100 mb-3">
-                        <span><?php echo 'Live ' . $starts->diffForHumans() ?></span>
-                        <span><?php echo $participants ?>&nbsp;<?php _e( 'participants', 'reb_domain' ) ?></span>
+                    <div class="flex justify-between border-b font-semibold text-primary-100 border-primary-100 pb-3 mb-3">
+                        <span class="py-2"><?php echo $starts->format('d.m.Y H:i') ?></span>
+	                    <?php if(get_field('field_6196833f81731')): ?>
+                            <a href="<?php the_field('field_6196833f81731'); ?>" class="inline-block bg-red-800 text-white py-2 px-3">
+			                    <?php _e('survey', 'reb_domain') ?>
+                            </a>
+	                    <?php endif; ?>
                     </div>
                     <div class="text-gray-900 py-5">
                         <h2 class="text-lg mb-4 uppercase font-bold"><?php the_title() ?></h2>
@@ -81,14 +85,7 @@ extract( $args );
 							<?php echo get_the_excerpt(); ?>
                         </p>
 
-                        <div class="flex justify-between mt-3">
-                        <div>
-                            <?php if(get_field('field_6196833f81731')): ?>
-                                <a href="<?php the_field('field_6196833f81731'); ?>" class="inline-block bg-logo text-white py-2 px-3 leading-none">
-		                            <?php _e('survey', 'reb_domain') ?>
-                                </a>
-                            <?php endif; ?>
-                        </div>
+                        <div class="flex justify-end mt-3">
                         <div>
                             <a href="<?php the_permalink(); ?>" class="inline py-2">
 		                        <?php _e( 'more', 'reb_domain' ) ?>

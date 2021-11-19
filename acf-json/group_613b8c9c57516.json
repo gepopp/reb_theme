@@ -79,6 +79,30 @@
             "maxlength": ""
         },
         {
+            "key": "field_61979a04c1a59",
+            "label": "Unternehemenslogo",
+            "name": "unternehemenslogo",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
             "key": "field_617040c6f50bc",
             "label": "Unternehmenslink",
             "name": "unternehmenslink",
@@ -190,6 +214,22 @@
                     "maxlength": ""
                 }
             ]
+        },
+        {
+            "key": "field_61979a17c1a5a",
+            "label": "LinkedinProfil",
+            "name": "linkedinprofil",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
         }
     ],
     "location": [
@@ -209,5 +249,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1636664838
+    "show_in_rest": 0,
+    "modified": 1637325376
 }
