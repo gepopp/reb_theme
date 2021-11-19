@@ -1,5 +1,5 @@
 <?php
-get_header();
+get_header('livestream');
 the_post();
 
 $cats = get_terms( 'immolive' );

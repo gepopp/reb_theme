@@ -1,0 +1,62 @@
+{
+    "key": "group_6197cdd57051e",
+    "title": "Meinnungen",
+    "fields": [
+        {
+            "key": "field_6197cdea9e8c3",
+            "label": "Expertenmeinung",
+            "name": "expertenmeinung",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 5,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_6197ce849e8c5",
+                    "label": "Experten Video",
+                    "name": "experten_video_",
+                    "type": "oembed",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "expert-video",
+                        "id": ""
+                    },
+                    "width": 0,
+                    "height": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "livestream"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1637339742
+}
