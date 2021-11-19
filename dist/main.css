@@ -1796,6 +1796,11 @@ video {
   padding-bottom: 6rem;
 }
 
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .pb-5 {
   padding-bottom: 1.25rem;
 }
@@ -2832,6 +2837,10 @@ html {
     transform: var(--tw-transform);
   }
 
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .sm\:flex-row-reverse {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: reverse;
@@ -2916,10 +2925,6 @@ html {
 
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .md\:grid-cols-5 {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .md\:grid-cols-3 {
@@ -3104,12 +3109,16 @@ html {
     flex-shrink: 0;
   }
 
-  .lg\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .lg\:grid-cols-4 {
@@ -3165,6 +3174,11 @@ html {
   .lg\:px-5 {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
+  }
+
+  .lg\:py-0 {
+    padding-top: 0px;
+    padding-bottom: 0px;
   }
 
   .lg\:pr-10 {

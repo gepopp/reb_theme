@@ -7,7 +7,9 @@ module.exports = {
 		],
 		safelist: [
 			'line-clamp-3',
-			'three-lines'
+			'three-lines',
+			'lg:grid-cols-3',
+			'lg:grid-cols-5',
 		]
 	},
 	prefix: '',
