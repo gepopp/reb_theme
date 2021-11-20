@@ -140,8 +140,8 @@ trait ImmoliveEmails {
 		$this->delete_campaign_by_post_id( $immolive_id );
 
 		$teilnehmer = get_field( 'field_614ad5e239622', $immolive_id );
-
-
+		$speakers = get_field( 'field_614ad5e239622', $immolive_id );
+        $speaker = array_shift($speakers);
 		$items = [
 			[
 				"Layout"     => "SIMPLE TEXT",
@@ -172,37 +172,38 @@ trait ImmoliveEmails {
 					],
 				],
 			],
+			[
+				'Layout'     => 'SPEAKERS TABLE',
+				'Multilines' => [
+					[
+						'Content' => get_the_title( $speaker ),
+					],
+					[
+						'Content' => get_field( 'field_613c54063d6b9', $speaker ),
+					],
+					[
+						'Content' => get_field( 'field_613b8caa9b06c', $speaker ),
+					],
+					[
+						'Content' => '',
+					],
+				],
+				"Images"     => [
+					[
+						"Content" => get_the_post_thumbnail_url( $speaker, 'thumbnail' ),
+						"Alt"     => get_the_title( $speaker ),
+					],
+				],
+			]
 		];
 
 
-		$speakers = get_field( 'field_614ad5e239622', $immolive_id );
-		if ( $speakers ) {
-			foreach ( $speakers as $speaker ) {
-				$items[] = [
-					'Layout'     => 'SPEAKERS TABLE',
-					'Multilines' => [
-						[
-							'Content' => get_the_title( $speaker->ID ),
-						],
-						[
-							'Content' => get_field( 'field_613c54063d6b9', $speaker->ID ),
-						],
-						[
-							'Content' => get_field( 'field_613b8caa9b06c', $speaker->ID ),
-						],
-						[
-							'Content' => '',
-						],
-					],
-					"Images"     => [
-						[
-							"Content" => get_the_post_thumbnail_url( $speaker->ID, 'thumbnail' ),
-							"Alt"     => get_the_title( $speaker->ID ),
-						],
-					],
-				];
-			}
-		}
+
+//		if ( $speakers ) {
+//			foreach ( $speakers as $speaker ) {
+//				$items[] =
+//			}
+//		}
 //
 
 		$data = [
