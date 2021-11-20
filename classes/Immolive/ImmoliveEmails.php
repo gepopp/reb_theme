@@ -204,7 +204,7 @@ trait ImmoliveEmails {
 					],
 					"Images"      => [
 						[
-							"Content" => get_the_post_thumbnail_url( $speaker->ID ),
+							"Content" => get_the_post_thumbnail_url( $speaker->ID, 'thumbnail' ),
 							"Alt"     => get_the_title( $speaker->ID ),
 						],
 					],
