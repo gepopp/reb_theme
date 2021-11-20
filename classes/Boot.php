@@ -11,6 +11,7 @@ class Boot {
 
 		$this->boot_classes();
 		add_action('after_setup_theme', [$this, 'theme_setup'] );
+		add_filter('excerpt_more', function(){ return ''; });
 
 	}
 

@@ -96,9 +96,17 @@ class CampaignMonitor {
 	}
 
 
-	public static function get_authorization_header() {
+	public static function get_authorization_header($xml = false) {
+
+		if(!$xml){
+			return [
+				'authorization' => 'Basic ' . base64_encode( get_field('field_619276110f7be', 'option') ),
+			];
+		}
+
 		return [
 			'authorization' => 'Basic ' . base64_encode( get_field('field_619276110f7be', 'option') ),
+			'mime-type' => 'text/xml'
 		];
 	}
 
