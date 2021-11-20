@@ -142,53 +142,45 @@ trait ImmoliveEmails {
 		$teilnehmer = get_field( 'field_614ad5e239622', $immolive_id );
 
 
-        $items =  [
-	        [
-		        "Layout"     => "SIMPLE TEXT",
-		        "Multilines" => [
-			        [
-				        "Content" => "<p>" . get_the_title( $immolive_id ) . "</p>",
-			        ],
-			        [
-				        "Content" => "<p>Beginnt heute um " . $termin->format( 'H:i' ) . " Uhr.</p>",
-			        ],
-			        [
-				        "Content" => "<p>" . get_the_excerpt( $immolive_id ) . "</p>",
-			        ],
-			        [
-				        "Content" => "<p>Zum Livestream</p>",
-				        "Href"    => get_the_permalink( $immolive_id ),
-			        ],
-			        [
-				        "Content" => "<p></p>",
-			        ],
-		        ],
-	        ],
-	        [
-		        "Layout"     => "UPCOMING EVENTS TITLE STARTS",
-		        "Multilines" => [
-			        [
-				        "Content" => "<p>Unsere Sprecher</p>",
-			        ],
-		        ],
-	        ],
-	        [
-		        "Layout"     => "UPCOMING EVENTS TITLE STARTS",
-		        "Multilines" => [
-			        [
-				        "Content" => "<p>Unsere Sprecher</p>",
-			        ],
-		        ],
-	        ],
-        ];
+		$items = [
+			[
+				"Layout"     => "SIMPLE TEXT",
+				"Multilines" => [
+					[
+						"Content" => "<p>" . get_the_title( $immolive_id ) . "</p>",
+					],
+					[
+						"Content" => "<p>Beginnt heute um " . $termin->format( 'H:i' ) . " Uhr.</p>",
+					],
+					[
+						"Content" => "<p>" . get_the_excerpt( $immolive_id ) . "</p>",
+					],
+					[
+						"Content" => "<p>Zum Livestream</p>",
+						"Href"    => get_the_permalink( $immolive_id ),
+					],
+					[
+						"Content" => "<p></p>",
+					],
+				],
+			],
+			[
+				"Layout"     => "UPCOMING EVENTS TITLE STARTS",
+				"Multilines" => [
+					[
+						"Content" => "<p>Unsere Sprecher</p>",
+					],
+				],
+			],
+		];
 
 
 		$speakers = get_field( 'field_614ad5e239622', $immolive_id );
 		if ( $speakers ) {
 			foreach ( $speakers as $speaker ) {
 				$items[] = [
-					'Layout'      => 'UPCOMING EVENTS STARTS',
-					'Mulitilines' => [
+					'Layout'     => 'SPEAKERS TABLE',
+					'Multilines' => [
 						[
 							'Content' => get_the_title( $speaker->ID ),
 						],
@@ -202,7 +194,7 @@ trait ImmoliveEmails {
 							'Content' => '',
 						],
 					],
-					"Images"      => [
+					"Images"     => [
 						[
 							"Content" => get_the_post_thumbnail_url( $speaker->ID, 'thumbnail' ),
 							"Alt"     => get_the_title( $speaker->ID ),
@@ -211,7 +203,7 @@ trait ImmoliveEmails {
 				];
 			}
 		}
-
+//
 
 		$data = [
 			"Name"            => $immolive_id . ' ' . get_the_title( $immolive_id ),
@@ -226,13 +218,13 @@ trait ImmoliveEmails {
 			"TemplateContent" => [
 				"Repeaters" => [
 					[
-						'Items' => $items
+						'Items' => $items,
 					],
 				],
 			],
 		];
 
-        $data = json_encode( $data );
+		$data = json_encode( $data );
 
 		$campaign = wp_remote_post( sprintf( 'https://api.createsend.com/api/v3.2/campaigns/%s/fromtemplate.json', get_field( 'field_61938af4c1fcf', 'option' ) ), [
 			'headers' => CampaignMonitor::get_authorization_header(),
