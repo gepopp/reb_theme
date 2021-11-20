@@ -118,6 +118,8 @@ trait ImmoliveEmails {
 
 	public function create_reminder_campaign( $immolive_id, $immolive ) {
 
+		$cm = new CampaignMonitor();
+
 		if ( get_post_status( $immolive_id ) != 'publish' || ! has_post_thumbnail( $immolive_id ) ) {
 			return;
 		}
@@ -135,80 +137,143 @@ trait ImmoliveEmails {
 			return;
 		}
 
-
-//		$templates = wp_remote_get( sprintf( 'https://api.createsend.com/api/v3.2/clients/%s/templates.json', get_field( 'field_61938af4c1fcf', 'option' ) ), [
-//			'headers' => CampaignMonitor::get_authorization_header(),
-//		] );
-//
-//        $body = wp_remote_retrieve_body($templates);
-//
-//        wp_die(var_dump($body));
+		$this->delete_campaign_by_post_id( $immolive_id );
 
 		$teilnehmer = get_field( 'field_614ad5e239622', $immolive_id );
 
-		ob_start();
-		?>
-        <h3>Unsere Expert*innen im Livestream:</h3>
-        <ul>
-			<?php foreach ( $teilnehmer as $item ): ?>
-                <li>
-					<?php echo get_field( 'field_613b8ca49b06b', $item ) . ' ' . get_field( 'field_613c53f33d6b8', $item ) ?>,&nbsp;
-					<?php echo get_field( 'field_613c54063d6b9', $item ) ?>
-                </li>
-			<?php endforeach; ?>
-        </ul>
 
-		<?php
-		$list = ob_get_clean();
+        $items =  [
+	        [
+		        "Layout"     => "SIMPLE TEXT",
+		        "Multilines" => [
+			        [
+				        "Content" => "<p>" . get_the_title( $immolive_id ) . "</p>",
+			        ],
+			        [
+				        "Content" => "<p>Beginnt heute um " . $termin->format( 'H:i' ) . " Uhr.</p>",
+			        ],
+			        [
+				        "Content" => "<p>" . get_the_excerpt( $immolive_id ) . "</p>",
+			        ],
+			        [
+				        "Content" => "<p>Zum Livestream</p>",
+				        "Href"    => get_the_permalink( $immolive_id ),
+			        ],
+			        [
+				        "Content" => "<p></p>",
+			        ],
+		        ],
+	        ],
+	        [
+		        "Layout"     => "UPCOMING EVENTS TITLE STARTS",
+		        "Multilines" => [
+			        [
+				        "Content" => "<p>Unsere Sprecher</p>",
+			        ],
+		        ],
+	        ],
+	        [
+		        "Layout"     => "UPCOMING EVENTS STARTS",
+		        "Multilines" => [
+			        [
+				        "Content" => "<p>Unsere Sprecher</p>",
+			        ],
+		        ],
+	        ],
+        ];
 
+
+		$speakers = get_field( 'field_614ad5e239622', $immolive_id );
+		if ( $speakers ) {
+			foreach ( $speakers as $speaker ) {
+				$items[] = [
+					'Layout'      => 'UPCOMING EVENTS STARTS',
+					'Mulitilines' => [
+						[
+							'Content' => get_the_title( $speaker->ID ),
+						],
+						[
+							'Content' => get_field( 'field_613c54063d6b9', $speaker->ID ),
+						],
+						[
+							'Content' => get_field( 'field_613b8caa9b06c', $speaker->ID ),
+						],
+						[
+							'Content' => '',
+						],
+					],
+					"Images"      => [
+						[
+							"Content" => get_the_post_thumbnail_url( $speaker->ID ),
+							"Alt"     => get_the_title( $speaker->ID ),
+						],
+					],
+				];
+			}
+		}
+
+
+		$data = [
+			"Name"            => $immolive_id . ' ' . get_the_title( $immolive_id ),
+			"Subject"         => get_the_title( $immolive_id ),
+			"FromName"        => "brandtalks reb institute",
+			"FromEmail"       => "noreply@reb.institute",
+			"ReplyTo"         => "noreply@reb.institute",
+			"ListIDs"         => [
+				trim( get_post_meta( $immolive_id, 'cm_list', true ), '"' ),
+			],
+			"TemplateID"      => get_field( 'field_61927472aa0a1', 'option' ),
+			"TemplateContent" => [
+				"Repeaters" => [
+					[
+						'Items' => $items
+					],
+				],
+			],
+		];
+
+        $data = json_encode( $data );
 
 		$campaign = wp_remote_post( sprintf( 'https://api.createsend.com/api/v3.2/campaigns/%s/fromtemplate.json', get_field( 'field_61938af4c1fcf', 'option' ) ), [
 			'headers' => CampaignMonitor::get_authorization_header(),
-			'body'    => json_encode( [
-				"Name"            => __( 'REMINDER:  ', 'reb_domain' ) . get_the_title( $immolive_id ),
-				"Subject"         => get_the_title( $immolive_id ),
-				"FromName"        => "brandtalks reb institute",
-				"FromEmail"       => "noreply@reb.institute",
-				"ReplyTo"         => "noreply@reb.institute",
-				"ListIDs"         => [
-					trim( get_post_meta( $immolive_id, 'cm_list', true ), '"' ),
-				],
-				"TemplateID"      => "db7689496dba3f028dcb75a7e4de3a8b",
-//				"TemplateContent" => [
-//					"Multilines" => [
-//						[
-//							"Content" => "<p>Ihr ImmoLive beginnt in k&uuml;rze</p>",
-//						],
-//						[
-//							"Content" => "<p style='font-weight: bold'>Beginn: " . get_field( 'field_5ed527e9c2279', $immolive_id ) . "</p>",
-//						],
-//						[
-//							"Content" => "<p>" . get_the_title( $immolive_id ) . "</p>",
-//						],
-//						[
-//							"Content" => "<p><strong>" . get_the_excerpt( $immolive_id ) . '</strong><br><br>' . get_the_content( $immolive_id ) . "</p>" . $list,
-//						],
-//					],
-//				],
-			] ),
+			'body'    => $data,
 		] );
 
-		$cm = new CampaignMonitor();
 
 		if ( $cm->isSuccess( $campaign ) ) {
 
 			$campaign = trim( wp_remote_retrieve_body( $campaign ), '"' );
-			$termin   = get_field( 'field_5ed527e9c2279', $immolive_id );
-			$sent_at  = new Carbon( $termin );
-			$sent_at->subHours( 1 );
-
-			$sent = wp_remote_post( 'https://api.createsend.com/api/v3.2/campaigns/' . $campaign . '/send.json', [
+			$sent     = wp_remote_post( 'https://api.createsend.com/api/v3.2/campaigns/' . $campaign . '/send.json', [
 				'headers' => CampaignMonitor::get_authorization_header(),
 				'body'    => json_encode( [
-					"ConfirmationEmail" => "w.senk@immobilien-redaktion.at, gerhard@poppgerhard.at",
-					"SendDate"          => $sent_at->format( 'Y-m-d H:i' ),
+					"ConfirmationEmail" => "ronald.goigitzer@goreeo.eu, gerhard@poppgerhard.at",
+					"SendDate"          => $termin->subHour()->format( 'Y-m-d H:i' ),
 				] ),
 			] );
 		}
+
+	}
+
+	function delete_campaign_by_post_id( $id ) {
+
+		$response = wp_remote_get( sprintf( 'https://api.createsend.com/api/v3.2/clients/%s/scheduled.json', get_field( 'field_61938af4c1fcf', 'option' ) ), [
+			'headers' => CampaignMonitor::get_authorization_header(),
+		] );
+
+
+		$cm = new CampaignMonitor();
+		if ( $cm->isSuccess( $response ) ) {
+			$campaings = wp_remote_retrieve_body( $response );
+			foreach ( $campaings as $campaing ) {
+				if ( str_starts_with( $id ) ) {
+					return $this->delete_campaign( $campaing->CampaignID );
+				}
+			}
+		}
+	}
+
+	public function delete_campaign( $id ) {
+		return wp_remote_request( sprintf( 'https://api.createsend.com/api/v3.2/campaigns/%s.json', $id ),
+			[ 'method' => 'DELETE', 'headers' => CampaignMonitor::get_authorization_header() ] );
 	}
 }

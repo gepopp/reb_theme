@@ -6,6 +6,7 @@ namespace reb_livestream_classes\Boot;
 
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
+use reb_livestream_classes\CampaignMonitor;
 
 class ACF {
 
@@ -16,8 +17,26 @@ class ACF {
 		add_filter( 'acf/update_value/key=field_5ed527e9c2279', [ $this, 'save_immolive_termin' ], 10, 4 );
 		add_filter( 'acf/load_value/key=field_5ed527e9c2279', [ $this, 'load_immolive_termin' ], 10, 4 );
 		add_filter('acf/load_field/key=field_616199812fbf4', [$this, 'set_immolive_actions_content']);
+		add_filter('acf/load_field/key=field_61927472aa0a1', [$this, 'load_cm_templates']);
 
 	}
+
+
+    public function load_cm_templates( $field ){
+  		$templates = wp_remote_get( sprintf( 'https://api.createsend.com/api/v3.2/clients/%s/templates.json', get_field( 'field_61938af4c1fcf', 'option' ) ), [
+			'headers' => CampaignMonitor::get_authorization_header(),
+		] );
+
+        $body = json_decode(wp_remote_retrieve_body($templates));
+
+        foreach($body as $template){
+            $field['choices'][$template->TemplateID] = $template->Name;
+        }
+
+	    return $field;
+
+
+    }
 
 	public function set_immolive_actions_content($field){
 

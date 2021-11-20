@@ -120,7 +120,7 @@
             "key": "field_61927472aa0a1",
             "label": "Livestream beginnt in Kürze",
             "name": "livestream_beginnt_in_kurze",
-            "type": "text",
+            "type": "select",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -129,11 +129,18 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "choices": {
+                "2c434ce589cac93d3fcb5f5e706265ae": "Basic Template",
+                "db7689496dba3f028dcb75a7e4de3a8b": "Reminder Email",
+                "10c5d1520700a0af2444f0638b67c0ef": "Simple Text"
+            },
+            "default_value": false,
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
         },
         {
             "key": "field_619277e64967a",
@@ -192,5 +199,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1637059346
+    "modified": 1637349756
 }
