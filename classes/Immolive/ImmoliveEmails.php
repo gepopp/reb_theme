@@ -173,7 +173,7 @@ trait ImmoliveEmails {
 		        ],
 	        ],
 	        [
-		        "Layout"     => "UPCOMING EVENTS STARTS",
+		        "Layout"     => "UPCOMING EVENTS TITLE STARTS",
 		        "Multilines" => [
 			        [
 				        "Content" => "<p>Unsere Sprecher</p>",
