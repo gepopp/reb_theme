@@ -16,7 +16,7 @@ trait ImmoliveEmails {
 		$ical     = file_get_contents( $ical_url );
 
 		$data = [
-			'headerimage ' => get_the_post_thumbnail_url( $immolive_id, 'full' ),
+			'headerimage' => get_the_post_thumbnail_url( $immolive_id, 'full' ),
 			'title'        => get_the_title( $immolive_id ),
 			'excerpt'      => get_the_excerpt( $immolive_id ),
 			'permalink'    => get_the_permalink( $immolive_id ),
