@@ -15,9 +15,13 @@ trait ImmoliveEmails {
 		$ical_url = get_field( 'field_6143982f5f5f2', $immolive_id );
 		$ical     = file_get_contents( $ical_url );
 
+		$termin = get_field( 'field_5ed527e9c2279', $immolive_id );
+		$termin = new Carbon( $termin );
+
 		$data = [
 			'headerimage' => get_the_post_thumbnail_url( $immolive_id, 'full' ),
 			'title'        => get_the_title( $immolive_id ),
+			'schedule'     => $termin->format('d.m.Y H:i'),
 			'excerpt'      => get_the_excerpt( $immolive_id ),
 			'permalink'    => get_the_permalink( $immolive_id ),
 			'speakers'     => [],
