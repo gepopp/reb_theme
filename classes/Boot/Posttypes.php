@@ -113,42 +113,6 @@ class Posttypes {
 
 
 
-
-		$labels = [
-			'name'                       => 'Immobilien Projekt Kategorie',
-			'singular_name'              => 'Immobilien Projekt Kategorie',
-			'menu_name'                  => 'Immobilien Projekt Kategorie',
-			'all_items'                  => 'Alle Immobilien Projekt Kategorie',
-			'parent_item'                => 'Übergeordnet',
-			'parent_item_colon'          => 'Übergeordnet',
-			'new_item_name'              => 'Bezeichnung',
-			'add_new_item'               => 'Neunes Projekt Kategorie',
-			'edit_item'                  => 'bearbeiten',
-			'update_item'                => 'speichern',
-			'view_item'                  => 'ansehen',
-			'separate_items_with_commas' => 'Separate items with commas',
-			'add_or_remove_items'        => 'Add or remove items',
-			'choose_from_most_used'      => 'Choose from the most used',
-			'popular_items'              => 'Popular Items',
-			'search_items'               => 'Search Items',
-			'not_found'                  => 'Not Found',
-			'no_terms'                   => 'No items',
-			'items_list'                 => 'Items list',
-			'items_list_navigation'      => 'Items list navigation',
-		];
-		$args   = [
-			'labels'            => $labels,
-			'hierarchical'      => true,
-			'public'            => true,
-			'show_ui'           => true,
-			'show_admin_column' => true,
-			'show_in_nav_menus' => true,
-			'show_tagcloud'     => true,
-		];
-		register_taxonomy( 'projekt_category', [ 'immobilien_projekt' ], $args );
-		
-
-
 		$labels = [
 			'name'                  => _x( 'Zur Person', 'Post Type General Name', 'reb_domain' ),
 			'singular_name'         => _x( 'Zur Person', 'Post Type Singular Name', 'reb_domain' ),
@@ -181,7 +145,7 @@ class Posttypes {
 			'label'               => __( 'Zur Person', 'reb_domain' ),
 			'description'         => __( 'Zur Person', 'irtheme' ),
 			'labels'              => $labels,
-			'supports'            => [ 'title', 'editor', 'thumbnail', 'comments', 'custom-fields' ],
+			'supports'            => [ 'title', 'editor', 'thumbnail', 'comments', 'custom-fields', 'excerpt' ],
 			'taxonomies'          => [],
 			'hierarchical'        => false,
 			'public'              => true,
