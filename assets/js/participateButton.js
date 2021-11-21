@@ -17,7 +17,6 @@ window.participateButton = () => {
 
             axios.post(window.ajaxurl, params)
                 .then((msg) => {
-                    this.is_loading = false;
                     setTimeout(() => {
                         this.is_loading = true;
                         this.buttontext = window.messages.participate_sending;
@@ -31,7 +30,7 @@ window.participateButton = () => {
                             .then((msg) => {
                                 this.is_loading = false;
                                 this.buttontext = participate_completed;
-                                setTimeout(() => location.reload(), 1500)
+                                setTimeout(() => location.reload(), 1000)
                             })
                             .catch((err) => {
                                 this.is_loading = false;

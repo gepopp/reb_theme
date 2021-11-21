@@ -27,8 +27,13 @@ class ImmoliveSubscription {
 		$livestream_id = $verify[1];
 
 		$this->add_subscriber_to_list( $livestream_id, $user );
-		return $this->send_subscription_email($user->user_email, $livestream_id);
+		$success = $this->send_subscription_email($user->user_email, $livestream_id);
 
+		if($success){
+			wp_die('success');
+		}else{
+			wp_die('error', 400);
+		}
 
 	}
 
