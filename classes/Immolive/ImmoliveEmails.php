@@ -212,7 +212,7 @@ trait ImmoliveEmails {
 		$template  = get_field( 'field_61927472aa0a1', 'option' );
 		$excerpt   = get_the_excerpt( $livestream_id );
 		$permalink = get_the_permalink( $livestream_id );
-		$image     = get_the_post_thumbnail_url( 'full' );
+		$image     = get_the_post_thumbnail_url( $livestream_id, 'featured' );
 
 		$xml = <<<EOM
 <?xml version="1.0" encoding="utf-8"?>
