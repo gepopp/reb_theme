@@ -19,7 +19,7 @@ require('./single');
 require('./single-video');
 require('./immolive-subscription');
 require('./livePlayer');
-
+require('./participateButton')
 
 // Load Menu Script
 document.addEventListener('DOMContentLoaded', menu_init);

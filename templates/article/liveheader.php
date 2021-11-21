@@ -87,13 +87,6 @@ if ( $termin->addHour()->isPast() ) {
     >
         <div class="container py-10 flex justify-between relative">
 
-<!--            <div class="absolute top-0 right-0 pt-3 cursor-pointer" @click="show = false">-->
-<!--                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">-->
-<!--                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>-->
-<!--                </svg>-->
-<!--            </div>-->
-
-
             <div>
                 <p>
 			        <?php _e( 'Live at: ', 'reb_domain' ) ?>
@@ -104,14 +97,9 @@ if ( $termin->addHour()->isPast() ) {
 
 
 
-            <?php if ( is_user_logged_in() ): ?>
-
-
-                <a href="<?php the_permalink(); ?>"
-                   class="inline bg-logo text-center text-white font-bold py-3 px-5 focus:outline-none focus:shadow-outline flex items-center">
-					<?php _e( 'participate', 'reb_domain' ) ?>
-                </a>
-			<?php else: ?>
+            <?php if ( is_user_logged_in() ):
+                get_template_part('immolive', 'participatebutton');
+            else: ?>
 
 
                 <div class="flex flex-col">

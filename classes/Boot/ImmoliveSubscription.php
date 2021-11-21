@@ -12,75 +12,67 @@ class ImmoliveSubscription {
 
 	public function __construct() {
 
-		add_action( 'wp_ajax_immolive_subscription', [ $this, 'subscribe' ] );
-		add_action( 'wp_ajax_immolive_is_subscribed', [ $this, 'is_subscribed' ] );
-		add_action('publish_livestream', [$this, 'create_immolive_list']);
-		add_action('save_post_livestream', [$this, 'create_reminder_campaign'], 20,2);
+		add_action( 'wp_ajax_immolive_subscription', [ $this, 'subscribe_to_livestream' ] );
+		add_action( 'wp_ajax_immolive_subscription_email', [ $this, 'immolive_subscription_email' ] );
+		add_action( 'publish_livestream', [ $this, 'create_immolive_list' ] );
+		add_action( 'save_post_livestream', [ $this, 'create_reminder_campaign' ], 20, 2 );
+
+	}
+
+	public function immolive_subscription_email() {
+
+
+		$verify        = $this->verify();
+		$user          = $verify[0];
+		$livestream_id = $verify[1];
+
+		$this->add_subscriber_to_list( $livestream_id, $user );
+		return $this->send_subscription_email($user->user_email, $livestream_id);
+
 
 	}
 
 
-	public function is_subscribed(){
+	public function subscribe_to_livestream() {
 
-		if ( ! wp_verify_nonce( sanitize_text_field( $_POST['nonce'] ), 'wp_rest' ) ) {
-			wp_die( 'Spamschutz', 400 );
-		}
+		$verify        = $this->verify();
+		$user          = $verify[0];
+		$livestream_id = $verify[1];
 
-		$subscribers = get_field('field_601451bb66bc3', $_POST['id']);
-		$user = wp_get_current_user();
-		foreach ( $subscribers as $subscriber ) {
-			if($subscriber['user_email'] ==  $user->user_email){
-				wp_die(true);
-			}
-		}
-		wp_die(false);
-
-	}
-
-
-	public function subscribe() {
-
-		if ( ! wp_verify_nonce( sanitize_text_field( $_POST['nonce'] ), 'wp_rest' ) ) {
-			wp_die( 'Spamschutz', 400 );
-		}
-
-		$immolive_id = (int) $_POST['id'];
-
-		if ( get_post_type( $immolive_id ) !== 'immolive' ) {
-			wp_die( 'Datenfehler', 400 );
-		}
-
-		$user = wp_get_current_user();
-
-		$this->add_subscriber_to_list($immolive_id, $user);
-
-		$registrants = get_field( 'field_601451bb66bc3', $immolive_id );
+		$registrants = get_field( 'field_601451bb66bc3', $livestream_id );
 		foreach ( $registrants as $registrant ) {
 			if ( $registrant['user_email'] == $user->user_email ) {
-				wp_die( 'Anemldung erfolgreich!' );
+				wp_die( 'success' );
 			}
 		}
 
-		$question = sanitize_text_field( $_POST['question'] );
-
 		$added = add_row( 'field_601451bb66bc3', [
-			'user_name'        => $user->display_name,
-			'user_email'       => $user->user_email,
-			'frage_ans_podium' => $question,
-		], $immolive_id );
-
-
-
+			'user_name'  => $user->display_name,
+			'user_email' => $user->user_email,
+		], $livestream_id );
 
 		if ( $added ) {
-
-			$this->send_subscription_email( $user->display_name, $user->user_email, $immolive_id );
-			wp_die( 'Anmeldung erfolgreich!' );
-
+			wp_die( 'success' );
 		} else {
-			wp_die( 'Datenfehler', 400 );
+			wp_die( 'error', 400 );
 		}
+
 
 	}
 
+	public function verify() {
+
+		if ( ! wp_verify_nonce( sanitize_text_field( $_POST['nonce'] ), 'wp_rest' ) ) {
+			wp_die( __( 'Spam protection error, try again', 'reb_domain' ), 400 );
+		}
+
+		$livestream_id = (int) $_POST['id'];
+
+		if ( get_post_type( $livestream_id ) !== 'livestream' ) {
+			wp_die( __( 'Spam protection error, try again', 'reb_domain' ), 400 );
+		}
+
+		return [ wp_get_current_user(), $livestream_id ];
+
+	}
 }

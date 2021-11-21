@@ -116,15 +116,8 @@ extract( $args );
 							}
 
 							if ( empty( $is_participant ) ):
-								?>
-
-
-                                <a href="<?php the_permalink(); ?>"
-                                   class="block w-full bg-logo text-center text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline">
-									<?php _e( 'participate', 'reb_domain' ) ?>
-                                </a>
-
-                            <?php else: ?>
+                                get_template_part('immolive', 'participatebutton');
+                            else: ?>
 
                                 <p class="text-center py-2 ">
                                     <?php _e('your are allready subscribed', 'reb_domain') ?>

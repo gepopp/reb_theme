@@ -9,43 +9,43 @@ use reb_livestream_classes\CampaignMonitor;
 trait ImmoliveEmails {
 
 
-	public function send_subscription_email( $name, $email, $immolive_id ) {
+	public function send_subscription_email( $email, $immolive_id ) {
+
 
 		$ical_url = get_field( 'field_6143982f5f5f2', $immolive_id );
 		$ical     = file_get_contents( $ical_url );
 
-		$teilnehmer = get_field( 'field_614ad5e239622', $immolive_id );
+		$data = [
+			'headerimage ' => get_the_post_thumbnail_url( $immolive_id, 'featured' ),
+			'title'        => get_the_title( $immolive_id ),
+			'excerpt'      => get_the_excerpt( $immolive_id ),
+			'permalink'    => get_the_permalink( $immolive_id ),
+			'speakers'     => [],
+		];
 
-		ob_start();
-		?>
-        <ul>
-			<?php foreach ( $teilnehmer as $item ): ?>
-                <li>
-					<?php echo get_field( 'field_613b8ca49b06b', $item ) . ' ' . get_field( 'field_613c53f33d6b8', $item ) ?>,&nbsp;
-					<?php echo get_field( 'field_613c54063d6b9', $item ) ?>
-                </li>
-			<?php endforeach; ?>
-        </ul>
+		$speakers = get_field( 'field_614ad5e239622', $immolive_id );
+		if ( $speakers ) {
+			foreach ( $speakers as $speaker ) {
+				$data['speakers'][] = [
+					'image'    => get_the_post_thumbnail_url( $speaker, 'thumbnail' ),
+					'name'     => get_field('field_613c53f33d6b8', $speaker) . ' ' . get_field('field_613b8ca49b06b', $speaker),
+					'position' => get_field('field_613c54063d6b9', $speaker),
+					'company'  => get_field('field_613b8caa9b06c', $speaker),
+					'excerpt'  => get_the_excerpt( $speaker)
+				];
+			}
+		}
 
-		<?php
-		$list = ob_get_clean();
-
-
-		$result = wp_remote_post( sprintf( 'https://api.createsend.com/api/v3.2/transactional/smartEmail/%s/send', 'f681cc3f-299d-447c-8444-4b7fbec46082' ), [
+		$result = wp_remote_post( sprintf( 'https://api.createsend.com/api/v3.2/transactional/smartEmail/%s/send', get_field('field_61927467aa0a0', 'option') ), [
 			'headers' => CampaignMonitor::get_authorization_header(),
 			'body'    => json_encode( [
 				'To'                  => $email,
-				"Data"                => [
-					'title' => get_the_title( $immolive_id ),
-					'link'  => home_url( 'live' ),
-					'name'  => $name,
-					'list'  => $list,
-				],
+				"Data"                => $data,
 				"AddRecipientsToList" => true,
 				"ConsentToTrack"      => "Yes",
 				'Attachments'         => [
 					[
-						"Type"    => "text/calendar",
+						"Type"    => "text / calendar",
 						"Name"    => $_POST['post_id'] . '.ics',
 						"Content" => base64_encode( $ical ),
 					],
@@ -92,7 +92,7 @@ trait ImmoliveEmails {
 		if ( $cm->isSuccess( $result ) ) {
 			$body = wp_remote_retrieve_body( $result );
 			update_post_meta( $immolive_id, 'cm_list', trim( $body, '"' ) );
-			$this->add_subscriber_to_list( $immolive_id, get_user_by( 'email', 'gerhard@poppgerhard.at' ) );
+			$this->add_subscriber_to_list( $immolive_id, get_user_by( 'email', 'gerhard@poppgerhard . at' ) );
 		}
 	}
 
@@ -159,62 +159,64 @@ trait ImmoliveEmails {
 
 	}
 
-	function delete_campaign_by_post_id( $id ) {
+			function delete_campaign_by_post_id( $id ) {
 
-		$cm = new CampaignMonitor();
+				$cm = new CampaignMonitor();
 
-		$response = wp_remote_get( sprintf( 'https://api.createsend.com/api/v3.2/clients/%s/scheduled.json', get_field( 'field_61938af4c1fcf', 'option' ) ), [
-			'headers' => CampaignMonitor::get_authorization_header(),
-		] );
+				$response = wp_remote_get( sprintf( 'https://api.createsend.com/api/v3.2/clients/%s/scheduled.json', get_field( 'field_61938af4c1fcf', 'option' ) ), [
+					'headers' => CampaignMonitor::get_authorization_header(),
+				] );
 
 
-		if ( $cm->isSuccess( $response ) ) {
-			$scheduled = json_decode( wp_remote_retrieve_body( $response ) );
-		} else {
-			$scheduled = [];
-		}
+				if ( $cm->isSuccess( $response ) ) {
+					$scheduled = json_decode( wp_remote_retrieve_body( $response ) );
+				} else {
+					$scheduled = [];
+				}
 
-		$response = wp_remote_get( sprintf( 'https://api.createsend.com/api/v3.2/clients/%s/drafts.json', get_field( 'field_61938af4c1fcf', 'option' ) ), [
-			'headers' => CampaignMonitor::get_authorization_header(),
-		] );
+				$response = wp_remote_get( sprintf( 'https://api.createsend.com/api/v3.2/clients/%s/drafts.json', get_field( 'field_61938af4c1fcf', 'option' ) ), [
+					'headers' => CampaignMonitor::get_authorization_header(),
+				] );
 
-		if ( $cm->isSuccess( $response ) ) {
-			$drafts = json_decode( wp_remote_retrieve_body( $response ) );
-		} else {
-			$drafts = [];
-		}
+				if ( $cm->isSuccess( $response ) ) {
+					$drafts = json_decode( wp_remote_retrieve_body( $response ) );
+				} else {
+					$drafts = [];
+				}
 
-		$campaings = array_merge( $drafts, $scheduled );
+				$campaings = array_merge( $drafts, $scheduled );
 
-		foreach ( $campaings as $campaing ) {
-			if ( str_starts_with( $campaing->Name, $id ) ) {
-				$this->delete_campaign( $campaing->CampaignID );
+				foreach ( $campaings as $campaing ) {
+					if ( str_starts_with( $campaing->Name, $id ) ) {
+						$this->delete_campaign( $campaing->CampaignID );
+					}
+				}
 			}
-		}
-	}
 
-	public function delete_campaign( $id ) {
-		$response = wp_remote_request( sprintf( 'https://api.createsend.com/api/v3.2/campaigns/%s.json', $id ),
-			[ 'method' => 'DELETE', 'headers' => CampaignMonitor::get_authorization_header() ] );
+			public
+			function delete_campaign( $id ) {
+				$response = wp_remote_request( sprintf( 'https://api.createsend.com/api/v3.2/campaigns/%s.json', $id ),
+					[ 'method' => 'DELETE', 'headers' => CampaignMonitor::get_authorization_header() ] );
 
-		$cm = new CampaignMonitor();
-		$cm->isSuccess( $response );
-	}
+				$cm = new CampaignMonitor();
+				$cm->isSuccess( $response );
+			}
 
 
-	public function content_xml( $livestream_id ) {
+			public
+			function content_xml( $livestream_id ) {
 
-		$name      = $livestream_id . ' ' . get_the_title( $livestream_id );
-		$title     = get_the_title( $livestream_id );
-		$termin    = new Carbon( get_field( 'field_5ed527e9c2279', $livestream_id ) );
-		$time      = 'Beginnt um ' . $termin->format( 'H:i' ) . ' Uhr';
-		$list      = trim( get_post_meta( $livestream_id, 'cm_list', true ), '"' );
-		$template  = get_field( 'field_61927472aa0a1', 'option' );
-		$excerpt   = get_the_excerpt( $livestream_id );
-		$permalink = get_the_permalink( $livestream_id );
-		$image     = get_the_post_thumbnail_url( $livestream_id, 'featured' );
+				$name      = $livestream_id . ' ' . get_the_title( $livestream_id );
+				$title     = get_the_title( $livestream_id );
+				$termin    = new Carbon( get_field( 'field_5ed527e9c2279', $livestream_id ) );
+				$time      = 'Beginnt um ' . $termin->format( 'H:i' ) . ' Uhr';
+				$list      = trim( get_post_meta( $livestream_id, 'cm_list', true ), '"' );
+				$template  = get_field( 'field_61927472aa0a1', 'option' );
+				$excerpt   = get_the_excerpt( $livestream_id );
+				$permalink = get_the_permalink( $livestream_id );
+				$image     = get_the_post_thumbnail_url( $livestream_id, 'featured' );
 
-		$xml = <<<EOM
+				$xml = <<<EOM
 <?xml version="1.0" encoding="utf-8"?>
 <Campaign>
     <Name>$name</Name>
@@ -263,18 +265,18 @@ trait ImmoliveEmails {
        
 EOM;
 
-		$teilnehmer = get_field( 'field_614ad5e239622', $livestream_id );
+				$teilnehmer = get_field( 'field_614ad5e239622', $livestream_id );
 
-		$items = [];
-		foreach ( $teilnehmer as $t ) {
+				$items = [];
+				foreach ( $teilnehmer as $t ) {
 
-			$image       = get_the_post_thumbnail_url( $t, 'thumbnail' );
-			$title       = get_the_title( $t );
-			$postition   = get_field( 'field_613c54063d6b9', $t );
-			$unternehmen = get_field( 'field_613b8caa9b06c', $t );
-			$excerpt     = get_the_excerpt( $t );
+					$image       = get_the_post_thumbnail_url( $t, 'thumbnail' );
+					$title       = get_the_title( $t );
+					$postition   = get_field( 'field_613c54063d6b9', $t );
+					$unternehmen = get_field( 'field_613b8caa9b06c', $t );
+					$excerpt     = get_the_excerpt( $t );
 
-			$items[] = <<<EOM
+					$items[] = <<<EOM
  
         <RepeaterItem>
             <Layout>SPEAKERSTABLE</Layout>
@@ -302,11 +304,11 @@ EOM;
 EOM;
 
 
-		}
+				}
 
-		$speakers = implode( '', $items );
+				$speakers = implode( '', $items );
 
-		$end = <<<EOM
+				$end = <<<EOM
  </Items>
  </Repeater>
     </Repeaters>
@@ -314,11 +316,11 @@ EOM;
 </Campaign>
 EOM;
 
-		$xml = $xml . $speakers . $end;
+				$xml = $xml . $speakers . $end;
 
-		return $xml;
+				return $xml;
 
 
-	}
+			}
 
-}
+		}
