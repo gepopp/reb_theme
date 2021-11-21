@@ -18,6 +18,7 @@ window.participateButton = () => {
             axios.post(window.ajaxurl, params)
                 .then((msg) => {
                     setTimeout(() => {
+
                         this.is_loading = true;
                         this.buttontext = window.messages.participate_sending;
 
@@ -29,17 +30,18 @@ window.participateButton = () => {
                         axios.post(window.ajaxurl, params)
                             .then((msg) => {
                                 this.is_loading = false;
-                                this.buttontext = participate_completed;
+                                this.buttontext = window.messages.participate_completed;
                                 setTimeout(() => location.reload(), 1000)
                             })
                             .catch((err) => {
                                 this.is_loading = false;
                                 this.buttontext = window.messages.participate;
-                                this.error      = window.messages.participate_saving_error;
+                                this.error      = window.messages.participate_sending_error;
                             });
                     }, 1500);
                 })
                 .catch((err) => {
+                    console.log(err);
                     this.is_loading = false;
                     this.buttontext = window.messages.participate;
                     this.error      = window.messages.participate_saving_error;
