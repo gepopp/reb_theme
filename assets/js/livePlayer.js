@@ -33,42 +33,52 @@ window.liveplayer = (preroll, stream, video) => {
             this.is_preroll = false;
             this.loaded = false;
 
-            this.player.unload().then(() => {
+            if(!this.preroll.preroll_id){
 
                 if (this.video_id) {
-                    this.player.loadVideo(this.video_id).then(() => {
-                        this.player.getChapters()
-                            .then((c) => {
-                                this.chapters = c;
+                    this.src = 'https://player.vimeo.com/video/' + this.video_id;
+                }else{
+                    this.src = 'https://vimeo.com/event/' + this.stream_id + '/embed';
+                }
 
-                                let event = new CustomEvent("cloaded", {
-                                    detail: {
-                                        chapters: c
-                                    }
-                                });
-                                window.dispatchEvent(event);
+            }else{
+                this.player.unload().then(() => {
 
+                    if (this.video_id) {
+                        this.player.loadVideo(this.video_id).then(() => {
+                            this.player.getChapters()
+                                .then((c) => {
+                                    this.chapters = c;
 
-                                this.player.on('chapterchange', (c) => {
-
-                                    let event = new CustomEvent("cchange", {
+                                    let event = new CustomEvent("cloaded", {
                                         detail: {
-                                            chapter: c.index
+                                            chapters: c
                                         }
                                     });
                                     window.dispatchEvent(event);
 
-                                });
 
-                            })
-                            .catch((e) => console.log('chapter error'));
-                    }).catch(() => {
+                                    this.player.on('chapterchange', (c) => {
+
+                                        let event = new CustomEvent("cchange", {
+                                            detail: {
+                                                chapter: c.index
+                                            }
+                                        });
+                                        window.dispatchEvent(event);
+
+                                    });
+
+                                })
+                                .catch((e) => console.log('chapter error'));
+                        }).catch(() => {
+                            this.src = 'https://vimeo.com/event/' + this.stream_id + '/embed';
+                        });
+                    } else {
                         this.src = 'https://vimeo.com/event/' + this.stream_id + '/embed';
-                    });
-                } else {
-                    this.src = 'https://vimeo.com/event/' + this.stream_id + '/embed';
-                }
-            });
+                    }
+                });
+            }
         },
         setupPlayer() {
 
