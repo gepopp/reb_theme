@@ -98,6 +98,25 @@
             "maxlength": ""
         },
         {
+            "key": "field_619a658978459",
+            "label": "Pin zum ändern der E-Mail Adresse",
+            "name": "pin_zum_andern_der_e-mail_adresse",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_61927467aa0a0",
             "label": "Danke für Ihre Anmeldung",
             "name": "danke_fur_ihre_anmeldung",
@@ -130,7 +149,9 @@
                 "id": ""
             },
             "choices": {
+                "36d011f752f9be5f36dd4745dea92dc4": "Anmeldung zum Livestraem",
                 "2c434ce589cac93d3fcb5f5e706265ae": "Basic Template",
+                "56596c6dc03f583bb622b23d93c19bfd": "orignal",
                 "db7689496dba3f028dcb75a7e4de3a8b": "Reminder Email",
                 "10c5d1520700a0af2444f0638b67c0ef": "Simple Text"
             },
@@ -199,5 +220,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1637349756
+    "modified": 1637508516
 }

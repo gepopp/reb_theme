@@ -4,6 +4,8 @@
 namespace reb_livestream_classes\Boot;
 
 
+use reb_livestream_classes\CampaignMonitor;
+
 class AlterEmailPin {
 
 	public function __construct() {
@@ -36,10 +38,10 @@ class AlterEmailPin {
 
 	public function send_email_pin() {
 
-		$user = get_user_by('email', sanitize_email($_POST['old_email']));
+		$user = wp_get_current_user();
 
 		if (!$user) {
-			wp_die("Wir konnten keinen Pin senden, laden Sie die Seite neu und versuchen sie es erneut.", 400);
+			wp_die(_e('Error while sending pin, plrease retry', 'reb_domain'), 400);
 		}
 
 		global $wpdb;
@@ -52,15 +54,13 @@ class AlterEmailPin {
 			[
 				'user_id'   => $user->ID,
 				'new_email' => sanitize_email($_POST['email']),
-				'pin'       => $pin,
+				'PIN'       => $pin,
 			],
 			['%d', '%s', '%d']);
 
 
-		$result = wp_remote_post('https://api.createsend.com/api/v3.2/transactional/smartEmail/0ee71250-5880-473a-b721-bd741fa17f0d/send', [
-			'headers' => [
-				'authorization' => 'Basic ' . base64_encode('fab3e169a5a467b38347a38dbfaaad6d'),
-			],
+		$result = wp_remote_post(sprintf('https://api.createsend.com/api/v3.2/transactional/smartEmail/%s/send', get_field('field_619a658978459', 'option')), [
+			'headers' => CampaignMonitor::get_authorization_header(),
 			'body'    => json_encode([
 				'To'                  => $user->data->user_email,
 				"Data"
@@ -74,10 +74,13 @@ class AlterEmailPin {
 		]);
 
 
-		if (wp_remote_retrieve_response_code($result) < 200 || wp_remote_retrieve_response_code($result) > 299) {
-			wp_die('Wir konnten keinen Pin senden.', 400);
+		$cm = new CampaignMonitor();
+		if(!$cm->isSuccess($result)){
+			wp_die(_e('Error while sending pin, plrease retry', 'reb_domain'), 400);
+		}else{
+			wp_die('success');
 		}
-		wp_die('success');
+
 	}
 
 }
