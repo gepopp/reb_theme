@@ -74,7 +74,7 @@ extract( $args );
                     <div class="flex justify-between border-b font-semibold text-primary-100 border-primary-100 pb-3 mb-3">
                         <span class="py-2"><?php echo $starts->format('d.m.Y H:i') ?></span>
 	                    <?php if(get_field('field_6196833f81731')): ?>
-                            <a href="<?php the_field('field_6196833f81731'); ?>" class="inline-block bg-red-800 text-white py-2 px-3">
+                            <a href="<?php the_field('field_6196833f81731'); ?>" class="inline-block bg-red-800 text-white py-2 px-3" target="_blank">
 			                    <?php _e('survey', 'reb_domain') ?>
                             </a>
 	                    <?php endif; ?>

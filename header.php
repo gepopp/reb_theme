@@ -100,7 +100,7 @@ language_attributes(); ?>>
                     </li>
 				<?php endif; ?>
                 <li class="text-lg font-semibold flex items-center">
-                    <a href="https://reb.institute" class="flex items-center">
+                    <a href="https://reb.institute" class="flex items-center" target="_blank">
                         <span><?php _e( 'back to reb.institiute' ) ?></span>
                         <svg class="w-6 h-6 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
