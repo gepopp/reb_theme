@@ -28,18 +28,18 @@ extract(array_merge($default, $args));
             <p class="<?php echo $mode == 'dark' ? 'text-white' : 'text-gray-800' ?> text-xs"><?php the_time('d.m.Y') ?></p>
         </div>
 
-        <div class="flex text-white" x-data="articleViews(<?php the_ID(); ?>)" x-init="viewsXHR()">
-            <svg class="w-4 h-4 <?php echo $mode == 'dark' ? 'text-white' : 'text-gray-800' ?> mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
-            </svg>
-            <p>
-                <svg x-show="!views" class="w-6 h-6 text-gray-300 animate-pulse" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                </svg>
-            <p class="<?php echo $mode == 'dark' ? 'text-white' : 'text-gray-800' ?> text-xs" x-show="views" x-text="views"></p>
-            </p>
-        </div>
+<!--        <div class="flex text-white" x-data="articleViews(--><?php //the_ID(); ?><!--)" x-init="viewsXHR()">-->
+<!--            <svg class="w-4 h-4 --><?php //echo $mode == 'dark' ? 'text-white' : 'text-gray-800' ?><!-- mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">-->
+<!--                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>-->
+<!--                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>-->
+<!--            </svg>-->
+<!--            <p>-->
+<!--                <svg x-show="!views" class="w-6 h-6 text-gray-300 animate-pulse" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">-->
+<!--                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>-->
+<!--                </svg>-->
+<!--            <p class="--><?php //echo $mode == 'dark' ? 'text-white' : 'text-gray-800' ?><!-- text-xs" x-show="views" x-text="views"></p>-->
+<!--            </p>-->
+<!--        </div>-->
     </div>
 </div>
 <hr class="my-2">
