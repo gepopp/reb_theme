@@ -83,6 +83,7 @@ $termin = new \Carbon\Carbon( get_field( 'field_5ed527e9c2279' ) );
 				?>
             </div>
             <div class="content col-span-6 lg:col-span-1">
+				<?php get_template_part( 'video', 'moderator' ) ?>
 				<?php get_template_part( 'video', 'speaker' ) ?>
             </div>
         </div>

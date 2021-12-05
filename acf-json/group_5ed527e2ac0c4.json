@@ -39,6 +39,31 @@
             "mime_types": ""
         },
         {
+            "key": "field_61acddbd67a5d",
+            "label": "Moderatoren",
+            "name": "moderatoren",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "zur_person"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id"
+        },
+        {
             "key": "field_614ad5e239622",
             "label": "Studiogäste",
             "name": "studiogaste",
@@ -117,5 +142,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1637253974
+    "modified": 1638718953
 }
