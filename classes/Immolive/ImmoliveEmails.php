@@ -304,7 +304,7 @@ EOM;
 			$items[] = <<<EOM
  
         <RepeaterItem>
-            <Layout>SPEAKERSTABLE</Layout>
+            <Layout>HOSTSTABLE</Layout>
             <Images>
               <Image>
                 <Content>$image</Content>
@@ -330,6 +330,15 @@ EOM;
 		}
 
 		$hosts = implode( '', $items );
+
+
+		$seperator = <<<EOM
+</Items>
+</Repeater>
+<Repeater>
+<Items>
+EOM;
+
 
 
 		$teilnehmer = get_field( 'field_614ad5e239622', $livestream_id );
@@ -383,9 +392,9 @@ EOM;
 </Campaign>
 EOM;
 
-		$xml = $xml . $hosts . $speakers . $end;
+		$all = $xml . $hosts . $seperator . $speakers . $end;
 
-		return $xml;
+		return $all;
 
 
 	}
