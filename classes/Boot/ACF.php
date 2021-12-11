@@ -14,7 +14,7 @@ class ACF {
 
 		add_action( 'acf/init', [ $this, 'ir_add_options_pages' ] );
 		add_filter( 'acf/update_value/key=field_5a3ce915590ae', [ $this, 'update_duration' ], 10, 4 );
-		add_filter( 'acf/update_value/key=field_5ed527e9c2279', [ $this, 'save_immolive_termin' ], 10, 4 );
+	//	add_filter( 'acf/update_value/key=field_5ed527e9c2279', [ $this, 'save_immolive_termin' ], 10, 4 );
 	//	add_filter( 'acf/load_value/key=field_5ed527e9c2279', [ $this, 'load_immolive_termin' ], 10, 4 );
 		add_filter('acf/load_field/key=field_616199812fbf4', [$this, 'set_immolive_actions_content']);
 		add_filter('acf/load_field/key=field_61927472aa0a1', [$this, 'load_cm_templates']);
